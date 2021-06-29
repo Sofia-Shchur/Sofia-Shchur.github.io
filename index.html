@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Stylish Portfolio - Start Bootstrap Template</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+          rel="stylesheet" type="text/css">
+    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <link href="css/ab.css" rel="stylesheet">
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+</head>
+
+<body id="page-top">
+<!-- Navigation -->
+
+
+<a class="menu-toggle-lang rounded" style="right: 255px;" href="javascript:translateFn(0); void(0)">eng</a>
+<a class="menu-toggle-lang rounded" style="right: 310px;" href="javascript:translateFn(1); void(0)">ru</a>
+
+
+<a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+</a>
+
+<nav id="sidebar-wrapper">
+
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+            <a id="greetingCardSidebar" class="js-scroll-trigger" href="#page-top">Greeting card</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a id="homeSidebar" class="js-scroll-trigger" href="#page-top">Card</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a id="editorSidebar" class="js-scroll-trigger" href="#about">Editor</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a id="gallerySidebar" class="js-scroll-trigger" href="#portfolio">Gallery</a>
+        </li>
+    </ul>
+
+</nav>
+<!-- Header -->
+<header class="masthead d-flex">
+
+    <div class="container text-center my-auto">
+        <div style="display: block; margin-top: -70px;  padding: 10px; background: rgba(255,255,255,0.5); border: 4px dotted gray; width: 1000px; height: auto; min-height: 500px; overflow: scroll"
+             id="myABC">
+        </div>
+
+        <a class="btn btn-primary btn-xl js-scroll-trigger" style="width: 300px; margin: auto;" href="#about"
+           id="createCard">Create Your Card! </a></br></br>
+        <!--        <button id="myButtonHide">Hide div</button>-->
+        <!--        <button id="myButtonShow">Show div</button> -->
+
+
+        <h1 class="mb-1" id="greetHeader">Greetings Cards</h1>
+        <h3 class="mb-5" id="miniHeader">
+            <em>Best online Greetings Service</em>
+        </h3>
+        <br/>
+
+    </div>
+    <div class="overlay"></div>
+</header>
+
+<!-- About -->
+<section class="content-section bg-light" id="about">
+    <form id="sendCardForm" action="index.html" method="get">
+        <div class="container">
+            <h1 id="createCardHeader">Create your card</h1>
+            <input type="hidden" name="lang" id="lang">
+            <input type="hidden" name="bgr" id="bgr">
+            <input type="hidden" name="txtBgr" id="txtBgr" value="0">
+            <div style="width: 1000px; height: 68px; ">
+                <a id='clearBtn' style="margin: 4px; font-size: 12px; width: 136px; height: 53px; float: left"
+                   class="btn btn-primary btn-xl js-scroll-trigger"
+                   href="javascript:clearAb()">Clear<i class="fa fa-eraser" aria-hidden="true"></i> </a>
+                <a id='toCenterLetf' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
+                   class="btn btn-primary btn-xl js-scroll-trigger"
+                   href="javascript:toLeft()"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+                <a id='toCenterRight' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
+                   class="btn btn-primary btn-xl js-scroll-trigger"
+                   href="javascript:toRight()"><i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
+                <a id='toCenterUp' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
+                   class="btn btn-primary btn-xl js-scroll-trigger"
+                   href="javascript:toDown()"><i class="fa fa-arrow-down" aria-hidden="true"></i> </a>
+                <a id='toCenterDown' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
+                   class="btn btn-primary btn-xl js-scroll-trigger"
+                   href="javascript:toUp()"><i class="fa fa-arrow-up" aria-hidden="true"></i> </a>
+                <img id="heart" onclick='var e = document.getElementById("sizeLetter"); writePhrase("heartsymbol", "ab", e.options[e.selectedIndex].text)'
+                     src="pictures/heart.png"
+                     style="height: 64px; width: 64px; cursor: pointer">
+                <img onclick='var e = document.getElementById("sizeLetter"); writePhrase("smilesymbol", "ab", e.options[e.selectedIndex].text)'
+                     src="pictures/smile.png"
+                     style="height: 64px; width: 64px; cursor: pointer">
+                <div style="width: 320px; height: 68px; padding: 4px; float:right">
+                    <i id="colorText"> Color: </i> <input type="color" name="color" id="color" value="#ff0000"/>
+                    <i id="sizeText"> Size: </i>
+                    <select id="sizeLetter" name="sizeLetter" onchange="newSizeAb()">
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                        <option value="16">16</option>
+                        <option value="20" selected="selected">20</option>
+                        <option value="24">24</option>
+                        <option value="32">32</option>
+                        <option value="40">40</option>
+                        <option value="48">48</option>
+                        <option value="64">64</option>
+                        <option value="72">72</option>
+                        <option value="80">80</option>
+                        <option value="88">88</option>
+                        <option value="96">96</option>
+                        <option value="104">104</option>
+                    </select>
+                </div>
+            </div>
+            <p>  <textarea placeholder="write here" type="text" id="message" name="message"
+                           style="width: 1000px; height: 100px;"></textarea>
+            </p>
+            <p>
+            <div id="ab"
+                 style="border: 4px dotted gray; min-width: 1000px; height: auto; min-height: 500px; overflow: scroll"
+                 class="col-xs-12 col-sm-12 col-lg-12">
+            </div>
+            <br />
+            <br />
+            <h5 id="backgrounds">Backgrounds:</h5>
+            <a id="clear" class="buttonClear" href="javascript:removeBg()">Clear background</a>
+            <div id="previewBgr" style="margin-top: 8px; width:1000px; height: 64px;">&nbsp;</div>
+            </p>
+            <br /><br />
+            <h5 id="letters">Letters:</h5>
+            <span id="textureText"></br>
+                Texture: </span> <input type="checkbox" checked="checked" id="stripe" name="stripe"
+                                        onchange="check()"> <br/>
+
+            <div id="previewLetterBgr" style="margin-top: 8px; width:1000px; height: 64px;">&nbsp;</div>
+            </p>
+            <div id="bgrFunctions" class="col-xs-12 col-sm-12 col-lg-12 text-center">
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+                <a style="width:350px; margin-top: 10px" class="btn btn-primary btn-xl js-scroll-trigger"
+                   id="buttonSend"
+                   onclick="validateMessage(this);" href="javascript:void(0)"> SEND YOUR CARD!
+                </a>
+            </div>
+        </div>
+    </form>
+</section>
+
+<!-- Portfolio -->
+<section class="content-section" id="portfolio">
+    <div class="container">
+        <div class="content-section-heading text-center">
+            <h2 id="gallery" class="mb-5">Gallery</h2>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-6">
+                <a class="portfolio-item" href="index.html?lang=0&bgr=7&txtBgr=0&color=%2300e1ff&sizeLetter=32&message=C+%D0%BD%D0%BE%D0%B2%D1%8B%D0%BC+%D0%B3%D0%BE%D0%B4%D0%BE%D0%BC%21">
+                    <img class="img-fluid-gallery" src="pictures/newyearprev.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <a class="portfolio-item" href="index.html?lang=0&bgr=14&txtBgr=2&color=%23ff0000&sizeLetter=24&message=c+8+марта%21&stripe=on">
+                    <img class="img-fluid-gallery" src="pictures/8march.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <a class="portfolio-item" href="index.html?lang=0&bgr=11&txtBgr=9&color=%23ff0000&sizeLetter=20&message=с+днём+++++++++++++++++++++рождения%21&stripe=on">
+                    <img class="img-fluid-gallery" src="pictures/hbd.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <a class="portfolio-item" href="index.html?lang=0&bgr=6&txtBgr=2&color=%23ff0000&sizeLetter=16&message=С+днём+знаний%21">
+                    <img class="img-fluid-gallery" src="pictures/1sept.jpg" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="footer text-center">
+    <div class="container">
+        <ul class="list-inline mb-5">
+            <li class="list-inline-item">
+                <a class="social-link rounded-circle text-white mr-3" href="#!">
+                    <i class="icon-social-facebook"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="social-link rounded-circle text-white mr-3" href="#!">
+                    <i class="icon-social-twitter"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="social-link rounded-circle text-white" href="#!">
+                    <i class="icon-social-github"></i>
+                </a>
+            </li>
+        </ul>
+        <p class="text-muted small mb-0">Copyright &copy; Your Website 2021</p>
+    </div>
+</footer>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Custom scripts for this template -->
+<script src="js/stylish-portfolio.min.js"></script>
+<script src="js/ab.js"></script>
+<script src="js/absymbols.js"></script>
+<script src="js/abfunction.js"></script>
+
+
+</body>
+
+</html>
