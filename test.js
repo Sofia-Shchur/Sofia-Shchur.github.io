@@ -1,1 +1,1 @@
-setTimeout(function(){console.log(letterA);}, 5000);
+setTimeout(function(){console.log(123);console.log(letterA);}, 5000);
