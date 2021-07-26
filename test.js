@@ -1,7 +1,12 @@
 
 if(window.location.href.indexOf("sozdat-otkrytku") >= 0){
+  var $_GET = [];
+  window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (a, name, value) {
+    $_GET[name] = value;
+   });
  
- /* console.log(typeof $_GET['message']); *?
+   console.log("message " + typeof $_GET['message']); 
+ 
   console.log("we understand what is the special card page")
   
 }
