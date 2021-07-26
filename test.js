@@ -1,7 +1,7 @@
 
 if(window.location.href.indexOf("sozdat-otkrytku") >= 0){
  
-  console.log(typeof $_GET['message']);
+ /* console.log(typeof $_GET['message']); *?
   console.log("we understand what is the special card page")
   
 }
