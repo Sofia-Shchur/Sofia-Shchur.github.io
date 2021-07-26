@@ -1,6 +1,7 @@
 
 if(window.location.href.indexOf("sozdat-otkrytku") >= 0){
-  
+  <script src="https://sofia-shchur.github.io/js/abfunction.js" defer></script>
+  console.log(typeof $_GET['message']);
   console.log("we understand what is the special card page")
   
 }
