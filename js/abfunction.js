@@ -856,10 +856,10 @@ $(function () {
     }
 
     for (let i in bgPic) {
-        $("#previewBgr").append("<img onclick='changeBgr(this.src, this.id);' id='bgr_" + i + "' style='height: 64px; width: 64px; cursor: pointer' src='" + bgPic[i] + "'/>")
+        $("#previewBgr").append("<img onclick='changeBgr(this.src, this.id);' id='bgr_" + i + "' style='height: 64px; width: 64px; float: left; cursor: pointer' src='" + bgPic[i] + "'/>")
     }
     for (let j in bgrArr) {
-        $("#previewLetterBgr").append("<img onclick='changeLettersBgr(this.src, this.id);' id='img_" + j + "' style='height: 64px; width: 64px; cursor: pointer' src='" + bgrArr[j] + "'/>")
+        $("#previewLetterBgr").append("<img onclick='changeLettersBgr(this.src, this.id);' id='img_" + j + "' style='height: 64px; width: 64px; float: left; cursor: pointer' src='" + bgrArr[j] + "'/>")
     }
     $("#img_0").addClass("checkedImage");
 })
