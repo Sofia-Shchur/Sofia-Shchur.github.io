@@ -631,9 +631,12 @@ function writeLetter(arr, divId, lineWidth) {
     $('#a' + randNum).css({top: level * 100});
     var position = $('#a' + randNum).position();
     if (position.left < positionLeft) {
-        console.log("!!!! new line !!!!!");
-        level++;
-        console.log(level);
+         alert('Ввод большого количества текста доступен в PRO-версии!');
++        setTimeout(function () {
++            $(".letterDiv").hide("explode", {pieces: 9}, 1000);
++            clearAb();
++            positionLeft = 0;
++        }, 1000);
     }
     positionLeft = position.left;
     console.log("position.left");
