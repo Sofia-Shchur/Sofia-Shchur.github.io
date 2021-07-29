@@ -628,15 +628,19 @@ function writeLetter(arr, divId, lineWidth) {
 
     // unique space for concrete letter
     $("#" + divId).append('<div class="letterDiv" id="a' + randNum + '" style="width:' + width + 'px; border: 0 solid white; height: 204; float: left"></div>');
-    $('#a' + randNum).css({top: level * 100});
+    // $('#a' + randNum).css({top: level * 100});
     var position = $('#a' + randNum).position();
     if (position.left < positionLeft) {
-         alert('Ввод большого количества текста доступен в PRO-версии!');
-+        setTimeout(function () {
-+            $(".letterDiv").hide("explode", {pieces: 9}, 1000);
-+            clearAb();
-+            positionLeft = 0;
-+        }, 1000);
+        //$('.arrowsForText').addClass('hide');
+        alert('Ввод большого количества текста доступен в PRO-версии!');
+        setTimeout(function () {
+            $(".letterDiv").hide("explode", {pieces: 9}, 1000);
+            clearAb();
+            positionLeft = 0;
+        }, 1000);
+
+
+        console.log("!!!! new line !!!!!");
     }
     positionLeft = position.left;
     console.log("position.left");
