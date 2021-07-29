@@ -602,6 +602,7 @@ if (typeof $_GET['color'] !== 'undefined') {
     $('#color').val(pickerColor);
 }
 
+
 //writeLetter([], "ab", false);
 function writeLetter(arr, divId, lineWidth) {
     console.log('write letter');
@@ -625,6 +626,15 @@ function writeLetter(arr, divId, lineWidth) {
     $("#" + divId + " .line").css({"width": lineWidth + "px", "height": lineWidth + "px"});
     //$(".word").css({"width": width + "px"});
     const randNum = Math.floor(Math.random() * 1000000000);
+
+    function newLine(level, randNum) {
+        $('#a' + randNum).addClass('level_' + level);
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                writePhrase("\n", ab, lineWidth);
+            }
+        });
+    }
 
     // unique space for concrete letter
     $("#" + divId).append('<div class="letterDiv" id="a' + randNum + '" style="width:' + width + 'px; border: 0 solid white; height: 204; float: left"></div>');
@@ -775,30 +785,30 @@ function check() {
     }
 }
 
-var bgPic = ['http://sofia-shchur.github.io/pictures/wall.jpg',
-    'http://sofia-shchur.github.io/pictures/stars.jpg',
-    'http://sofia-shchur.github.io/pictures/cosmo.jpg',
-    'http://sofia-shchur.github.io/pictures/flowers_pink.jpg',
-    'http://sofia-shchur.github.io/pictures/flowers_yellow.jpg',
-    'http://sofia-shchur.github.io/pictures/paper.jpg',
-    'http://sofia-shchur.github.io/pictures/line_paper.jpg',
-    'http://sofia-shchur.github.io/pictures/new_year.jpg',
-    'http://sofia-shchur.github.io/pictures/new_year2.jpg',
-    'http://sofia-shchur.github.io/pictures/strawberry.jpg',
-    'http://sofia-shchur.github.io/pictures/wallpaper.jpg',
-    'http://sofia-shchur.github.io/pictures/watermelon.jpg',
-    'http://sofia-shchur.github.io/pictures/pizza.jpg',
-    'http://sofia-shchur.github.io/pictures/eggs.jpg',
-    'http://sofia-shchur.github.io/pictures/heart_small.png',
-    'http://sofia-shchur.github.io/pictures/tulip.jpg',
+var bgPic = ['pictures/wall.jpg',
+    'pictures/stars.jpg',
+    'pictures/cosmo.jpg',
+    'pictures/flowers_pink.jpg',
+    'pictures/flowers_yellow.jpg',
+    'pictures/paper.jpg',
+    'pictures/line_paper.jpg',
+    'pictures/new_year.jpg',
+    'pictures/new_year2.jpg',
+    'pictures/strawberry.jpg',
+    'pictures/wallpaper.jpg',
+    'pictures/watermelon.jpg',
+    'pictures/pizza.jpg',
+    'pictures/eggs.jpg',
+    'pictures/heart_small.png',
+    'pictures/tulip.jpg',
 ];
 
-var bgrArr = ['http://sofia-shchur.github.io/pictures/kitty.jpg',
-    'http://sofia-shchur.github.io/pictures/kitten.jpg',
-    'http://sofia-shchur.github.io/pictures/butterfly.jpg',
-    'http://sofia-shchur.github.io/pictures/lime.jpg',
-    'http://sofia-shchur.github.io/pictures/sun.jpg',
-    'http://sofia-shchur.github.io/pictures/heart_mini.jpg',
+var bgrArr = ['pictures/kitty.jpg',
+    'pictures/kitten.jpg',
+    'pictures/butterfly.jpg',
+    'pictures/lime.jpg',
+    'pictures/sun.jpg',
+    'pictures/heart_mini.jpg',
 ];
 
 function selectColor() {
@@ -863,10 +873,10 @@ $(function () {
     }
 
     for (let i in bgPic) {
-        $("#previewBgr").append("<img onclick='changeBgr(this.src, this.id);' id='bgr_" + i + "' style='height: 64px; width: 64px; float: left; cursor: pointer' src='" + bgPic[i] + "'/>")
+        $("#previewBgr").append("<img onclick='changeBgr(this.src, this.id);' id='bgr_" + i + "' style='height: 64px; width: 64px; cursor: pointer' src='" + bgPic[i] + "'/>")
     }
     for (let j in bgrArr) {
-        $("#previewLetterBgr").append("<img onclick='changeLettersBgr(this.src, this.id);' id='img_" + j + "' style='height: 64px; width: 64px; float: left; cursor: pointer' src='" + bgrArr[j] + "'/>")
+        $("#previewLetterBgr").append("<img onclick='changeLettersBgr(this.src, this.id);' id='img_" + j + "' style='height: 64px; width: 64px; cursor: pointer' src='" + bgrArr[j] + "'/>")
     }
     $("#img_0").addClass("checkedImage");
 })
