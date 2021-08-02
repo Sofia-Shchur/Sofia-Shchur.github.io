@@ -914,4 +914,3 @@ function translateFn(lang) {
 
 
 translateFn(0);
-
