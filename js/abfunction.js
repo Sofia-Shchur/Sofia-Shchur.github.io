@@ -642,7 +642,7 @@ function writeLetter(arr, divId, lineWidth) {
     var position = $('#a' + randNum).position();
     if (position.left < positionLeft) {
         //$('.arrowsForText').addClass('hide');
-        alert('Ввод большого количества текста доступен в PRO-версии!');
+       /* alert('Ввод большого количества текста доступен в PRO-версии!');
         setTimeout(function () {
             $(".letterDiv").hide("explode", {pieces: 9}, 1000);
             clearAb();
@@ -651,7 +651,7 @@ function writeLetter(arr, divId, lineWidth) {
 
 
         console.log("!!!! new line !!!!!");
-    }
+    } */
     positionLeft = position.left;
     console.log("position.left");
     console.log(position.left);
