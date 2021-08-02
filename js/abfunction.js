@@ -640,9 +640,9 @@ function writeLetter(arr, divId, lineWidth) {
     $("#" + divId).append('<div class="letterDiv" id="a' + randNum + '" style="width:' + width + 'px; border: 0 solid white; height: 204; float: left"></div>');
     // $('#a' + randNum).css({top: level * 100});
     var position = $('#a' + randNum).position();
-    if (position.left < positionLeft) {
+    /* if (position.left < positionLeft) {
         //$('.arrowsForText').addClass('hide');
-       /* alert('Ввод большого количества текста доступен в PRO-версии!');
+        alert('Ввод большого количества текста доступен в PRO-версии!');
         setTimeout(function () {
             $(".letterDiv").hide("explode", {pieces: 9}, 1000);
             clearAb();
