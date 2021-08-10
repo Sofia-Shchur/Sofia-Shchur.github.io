@@ -640,7 +640,7 @@ function writeLetter(arr, divId, lineWidth) {
     $("#" + divId).append('<div class="letterDiv" id="a' + randNum + '" style="width:' + width + 'px; border: 0 solid white; height: 204; float: left"></div>');
     // $('#a' + randNum).css({top: level * 100});
     var position = $('#a' + randNum).position();
-    /* if (position.left < positionLeft) {
+    if (position.left < positionLeft) {
         //$('.arrowsForText').addClass('hide');
         alert('Ввод большого количества текста доступен в PRO-версии!');
         setTimeout(function () {
@@ -651,7 +651,7 @@ function writeLetter(arr, divId, lineWidth) {
 
 
         console.log("!!!! new line !!!!!");
-    } */
+    }
     positionLeft = position.left;
     console.log("position.left");
     console.log(position.left);
@@ -785,30 +785,30 @@ function check() {
     }
 }
 
-var bgPic = ['http://sofia-shchur.github.io/pictures/wall.jpg',
-    'http://sofia-shchur.github.io/pictures/stars.jpg',
-    'http://sofia-shchur.github.io/pictures/cosmo.jpg',
-    'http://sofia-shchur.github.io/pictures/flowers_pink.jpg',
-    'http://sofia-shchur.github.io/pictures/flowers_yellow.jpg',
-    'http://sofia-shchur.github.io/pictures/paper.jpg',
-    'http://sofia-shchur.github.io/pictures/line_paper.jpg',
-    'http://sofia-shchur.github.io/pictures/new_year.jpg',
-    'http://sofia-shchur.github.io/pictures/new_year2.jpg',
-    'http://sofia-shchur.github.io/pictures/strawberry.jpg',
-    'http://sofia-shchur.github.io/pictures/wallpaper.jpg',
-    'http://sofia-shchur.github.io/pictures/watermelon.jpg',
-    'http://sofia-shchur.github.io/pictures/pizza.jpg',
-    'http://sofia-shchur.github.io/pictures/eggs.jpg',
-    'http://sofia-shchur.github.io/pictures/heart_small.png',
-    'http://sofia-shchur.github.io/pictures/tulip.jpg',
+var bgPic = ['pictures/wall.jpg',
+    'pictures/stars.jpg',
+    'pictures/cosmo.jpg',
+    'pictures/flowers_pink.jpg',
+    'pictures/flowers_yellow.jpg',
+    'pictures/paper.jpg',
+    'pictures/line_paper.jpg',
+    'pictures/new_year.jpg',
+    'pictures/new_year2.jpg',
+    'pictures/strawberry.jpg',
+    'pictures/wallpaper.jpg',
+    'pictures/watermelon.jpg',
+    'pictures/pizza.jpg',
+    'pictures/eggs.jpg',
+    'pictures/heart_small.png',
+    'pictures/tulip.jpg',
 ];
 
-var bgrArr = ['http://sofia-shchur.github.io/pictures/kitty.jpg',
-    'http://sofia-shchur.github.io/pictures/kitten.jpg',
-    'http://sofia-shchur.github.io/pictures/butterfly.jpg',
-    'http://sofia-shchur.github.io/pictures/lime.jpg',
-    'http://sofia-shchur.github.io/pictures/sun.jpg',
-    'http://sofia-shchur.github.io/pictures/heart_mini.jpg',
+var bgrArr = ['pictures/kitty.jpg',
+    'pictures/kitten.jpg',
+    'pictures/butterfly.jpg',
+    'pictures/lime.jpg',
+    'pictures/sun.jpg',
+    'pictures/heart_mini.jpg',
 ];
 
 function selectColor() {
