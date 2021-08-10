@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Postcards</title>
+    <title>Cards</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -101,24 +101,24 @@
                 <a id='clearBtn' style="margin: 4px; font-size: 12px; width: 136px; height: 53px; float: left"
                    class="btn btn-primary btn-xl js-scroll-trigger"
                    href="javascript:clearAb()">Clear<i class="fa fa-eraser" aria-hidden="true"></i> </a>
-                <a id='toCenterLetf' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
-                   class="btn btn-primary btn-xl js-scroll-trigger"
+                <a id='toCenterLeft' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
+                   class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
                    href="javascript:toLeft()"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
                 <a id='toCenterRight' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
-                   class="btn btn-primary btn-xl js-scroll-trigger"
+                   class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
                    href="javascript:toRight()"><i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
-                <a id='toCenterUp' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
-                   class="btn btn-primary btn-xl js-scroll-trigger"
-                   href="javascript:toDown()"><i class="fa fa-arrow-down" aria-hidden="true"></i> </a>
                 <a id='toCenterDown' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
-                   class="btn btn-primary btn-xl js-scroll-trigger"
+                   class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
+                   href="javascript:toDown()"><i class="fa fa-arrow-down" aria-hidden="true"></i> </a>
+                <a id='toCenterUp' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
+                   class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
                    href="javascript:toUp()"><i class="fa fa-arrow-up" aria-hidden="true"></i> </a>
                 <img id="heart" onclick='var e = document.getElementById("sizeLetter"); writePhrase("heartsymbol", "ab", e.options[e.selectedIndex].text)'
                      src="pictures/heart.png"
-                     style="height: 64px; width: 64px; cursor: pointer; float: left">
+                     style="height: 64px; width: 64px; cursor: pointer">
                 <img onclick='var e = document.getElementById("sizeLetter"); writePhrase("smilesymbol", "ab", e.options[e.selectedIndex].text)'
                      src="pictures/smile.png"
-                     style="height: 64px; width: 64px; cursor: pointer; float: left">
+                     style="height: 64px; width: 64px; cursor: pointer">
                 <div style="width: 320px; height: 68px; padding: 4px; float:right">
                     <i id="colorText"> Color: </i> <input type="color" name="color" id="color" value="#ff0000"/>
                     <i id="sizeText"> Size: </i>
@@ -153,7 +153,8 @@
             <h5 id="backgrounds">Backgrounds:</h5>
             <a id="clear" class="buttonClear" href="javascript:removeBg()">Clear background</a>
             <div id="previewBgr" style="margin-top: 8px; width:1000px; height: 64px;">&nbsp;</div>
-            </p>
+            </p> <button type="button" id="showMore" class="btn btn-primary btn-xs js-scroll-trigger" onclick="showMoreBg()"> Показать больше фонов: </button>
+            <div id="previewBgr2" style="margin-top: 8px; width:1000px; height: 64px;" class="hide">&nbsp;</div>
             <br /><br />
             <h5 id="letters">Letters:</h5>
             <span id="textureText"></br>
@@ -183,22 +184,22 @@
         </div>
         <div class="row no-gutters">
             <div class="col-lg-6">
-                <a class="portfolio-item" href="index.html?lang=0&bgr=7&txtBgr=0&color=%2300e1ff&sizeLetter=32&message=C+%D0%BD%D0%BE%D0%B2%D1%8B%D0%BC+%D0%B3%D0%BE%D0%B4%D0%BE%D0%BC%21">
+                <a class="portfolio-item" href="">
                     <img class="img-fluid-gallery" src="" alt="">
                 </a>
             </div>
             <div class="col-lg-6">
                 <a class="portfolio-item" href="index.html?lang=0&bgr=14&txtBgr=2&color=%23ff0000&sizeLetter=24&message=c+8+марта%21&stripe=on">
-                    <img class="img-fluid-gallery" src="/pictures/8march.jpg" alt="">
+                    <img class="img-fluid-gallery" src="pictures/8march.jpg" alt="">
                 </a>
             </div>
             <div class="col-lg-6">
-                <a class="portfolio-item" href="index.html?lang=0&bgr=11&txtBgr=9&color=%23ff0000&sizeLetter=20&message=с+днём+++++++++++++++++++++рождения%21&stripe=on">
+                <a class="portfolio-item" href="">
                     <img class="img-fluid-gallery" src="" alt="">
                 </a>
             </div>
             <div class="col-lg-6">
-                <a class="portfolio-item" href="index.html?lang=0&bgr=6&txtBgr=2&color=%23ff0000&sizeLetter=16&message=С+днём+знаний%21">
+                <a class="portfolio-item" href="">
                     <img class="img-fluid-gallery" src="" alt="">
                 </a>
             </div>
