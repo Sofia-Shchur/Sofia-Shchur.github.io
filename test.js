@@ -10,8 +10,11 @@ if(window.location.href.indexOf("sozdat-otkrytku") >= 0){
  
   console.log("we understand what is the special card page")
   
+}else{
+  $(".post-content").append("<div id='titleAb'></div>");
+  writePhrase('test', 'titleAb', 20);
+ 
 }
-
 /*
 
 window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (a, name, value) {
