@@ -12,7 +12,7 @@ if(window.location.href.indexOf("sozdat-otkrytku") >= 0){
   
 }else{
   $(".post-content").append("<div id='titleAb'></div>");
-  writePhrase('test', 'titleAb', 20);
+  writePhrase('test', 'titleAb', 20); 
  
 }
 /*
