@@ -1,5 +1,6 @@
 
 if(window.location.href.indexOf("sozdat-otkrytku") >= 0){
+  $(".post-content").removeClass("kg-canvas");
   var $_GET = [];
   window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (a, name, value) {
     $_GET[name] = value;
