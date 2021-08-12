@@ -2,7 +2,6 @@ $(function () {
 
     // $("#ab .line").draggable();
     window.backspaceActive = 0;
-
     document.getElementById('message').addEventListener('keydown', (event) => {
         if (event.key == 'Backspace') {
             window.backspaceActive = 1;
@@ -12,7 +11,7 @@ $(function () {
                     delLastSymbol();
                 }
             });
-        }else{
+        } else {
             window.backspaceActive = 0;
         }
     });
@@ -55,8 +54,10 @@ function delLastSymbol() {
     //},500)
 }
 
+var newSizeRun = false;
 
 function newSizeAb() {
+    newSizeRun = true;
     var text = $("#message").val();
     var e = document.getElementById("sizeLetter");
     var lineWidth = e.options[e.selectedIndex].text;
@@ -74,7 +75,6 @@ function clearAb() {
 }
 
 function toLeft() {
-
     var arrLetter = [];
     $(".letterDiv").each(function (index, value) {
         var position = $(this).position();
@@ -644,7 +644,7 @@ function writeLetter(arr, divId, lineWidth) {
     $("#" + divId).append('<div class="letterDiv" id="a' + randNum + '" style="width:' + width + 'px; border: 0 solid white; height: 204; float: left"></div>');
     // $('#a' + randNum).css({top: level * 100});
     var position = $('#a' + randNum).position();
-    if (position.left < positionLeft &&  window.backspaceActive == 0) {
+    if (position.left < positionLeft &&  (window.backspaceActive == 0 && newSizeRun !== true)) {
         //$('.arrowsForText').addClass('hide');
         alert('Ввод большого количества текста доступен в PRO-версии!');
         setTimeout(function () {
