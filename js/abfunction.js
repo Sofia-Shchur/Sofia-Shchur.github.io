@@ -820,6 +820,10 @@ var bgrArr = ['http://sofia-shchur.github.io/pictures/kitty.jpg',
     'http://sofia-shchur.github.io/pictures/lime.jpg',
     'http://sofia-shchur.github.io/pictures/sun.jpg',
     'http://sofia-shchur.github.io/pictures/heart_mini.jpg',
+    'http://sofia-shchur.github.io/pictures/sunset.jpg',
+    'http://sofia-shchur.github.io/pictures/pink.jpg',
+    'http://sofia-shchur.github.io/pictures/bluepinkflower.jpg',
+    'http://sofia-shchur.github.io/pictures/cat.jpg',
 ];
 
 function selectColor() {
