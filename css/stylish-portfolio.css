@@ -4,6 +4,11 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-stylish-portfolio/blob/master/LICENSE)
  */
 
+.pic {
+  width: 600px;
+  height: 300px;
+}
+
 .menu-toggle-lang {
   position: fixed;
   right: 15px;
@@ -432,4 +437,6 @@ a:active, a:focus, a:hover {
     clip-path: inset(8px);
   }
 }
+
+
 
