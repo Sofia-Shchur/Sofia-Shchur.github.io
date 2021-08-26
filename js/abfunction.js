@@ -1,3 +1,6 @@
+var toRightVar = 0;
+var toDownVar = 0;
+
 $(function () {
 
     // $("#ab .line").draggable();
@@ -84,6 +87,8 @@ function toLeft() {
     $(".letterDiv").each(function (index, value) {
         $(this).css({left: arrLetter[index] + -20, position: 'absolute'});
     });
+    toRightVar--;
+    $('#toRightVar').val(toRightVar);
 }
 
 
@@ -113,6 +118,8 @@ function toRight() {
         console.log("oldPosition.left + leftOffset", arrLetter[index]);
         $(this).css({left: arrLetter[index] + 20, position: 'absolute'});
     });
+    toRightVar++;
+    $('#toRightVar').val(toRightVar);
 }
 
 function toUp() {
@@ -138,6 +145,8 @@ function toUp() {
         $(this).css({top: arrUp[index] - 20, position: 'absolute'});
     });
     // }, 500)
+    toDownVar--;
+    $('#toDownVar').val(toDownVar);
 }
 
 function toDown() {
@@ -171,7 +180,8 @@ function toDown() {
     $(".letterDiv").each(function (index, value) {
         $(this).css({top: arrDownTop[index] + 20, position: 'absolute'});
     });
-
+    toDownVar++;
+    $('#toDownVar').val(toDownVar);
 }
 
 function writePhrase(str, divId, lineWidth) {
@@ -589,8 +599,24 @@ function writePhrase(str, divId, lineWidth) {
     if (chbox.checked) {
         $('.checkedImage').trigger('click');
     }
-}
+    var i;
+    if ($_GET['toRightVar']) {
+        i = 0;
+        while(i<$_GET['toRightVar']){
+            toRight();
+            i++;
+        }
+    }
 
+    if ($_GET['toDownVar']) {
+        i = 0;
+        while(i<$_GET['toDownVar']){
+            toDown();
+            i++;
+        }
+    }
+}
+//if ()
 
 var $_GET = [];
 window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (a, name, value) {
@@ -644,21 +670,27 @@ function writeLetter(arr, divId, lineWidth) {
     $("#" + divId).append('<div class="letterDiv" id="a' + randNum + '" style="width:' + width + 'px; border: 0 solid white; height: 204; float: left"></div>');
     // $('#a' + randNum).css({top: level * 100});
     var position = $('#a' + randNum).position();
-    if (position.left < positionLeft &&  (window.backspaceActive == 0 && newSizeRun !== true)) {
-        //$('.arrowsForText').addClass('hide');
-        alert('Ввод большого количества текста доступен в PRO-версии!');
-        setTimeout(function () {
-            $(".letterDiv").hide("explode", {pieces: 9}, 1000);
-            clearAb();
-            positionLeft = 0;
-        }, 1000);
+    if (position.left < positionLeft && (window.backspaceActive == 0 && newSizeRun !== true)) {
+        alertPRO();
+    }
 
-
+    function alertPRO() {
+        if ($_GET['message']) {
+            return;
+        } else {
+            alert('Ввод большого количества текста доступен в PRO-версии!');
+            setTimeout(function () {
+                $(".letterDiv").hide("explode", {pieces: 9}, 1000);
+                clearAb();
+                positionLeft = 0;
+            }, 1000);
+        }
         console.log("!!!! new line !!!!!");
     }
     positionLeft = position.left;
     console.log("position.left");
     console.log(position.left);
+
 
     //$(".letterDiv").unwrap();
     $.each(arr, function (index, value) {
@@ -674,6 +706,7 @@ function writeLetter(arr, divId, lineWidth) {
             });
         }
     });
+    console.log("write Letter end");
 }
 
 function addDruggable(divId) {
