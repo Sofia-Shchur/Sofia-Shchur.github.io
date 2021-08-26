@@ -96,6 +96,8 @@
             <h1 id="createCardHeader">Create your card</h1>
             <input type="hidden" name="lang" id="lang">
             <input type="hidden" name="bgr" id="bgr">
+            <input type="hidden" name="toRightVar" id="toRightVar" value="0">
+            <input type="hidden" name="toDownVar" id="toDownVar" value="0">
             <input type="hidden" name="txtBgr" id="txtBgr" value="0">
             <div style="width: 1000px; height: 68px; ">
                 <a id='clearBtn' style="margin: 4px; font-size: 12px; width: 136px; height: 53px; float: left"
@@ -140,6 +142,13 @@
                     </select>
                 </div>
             </div>
+            <h5 id="letters">Letters:</h5>
+            <span id="textureText"></br>
+                Texture: </span> <input type="checkbox" checked="checked" id="stripe" name="stripe"
+                                        onchange="check()"> <br/>
+
+            <div id="previewLetterBgr" style="margin-top: 8px; width:1000px; height: 64px;">&nbsp;</div>
+            <p><p/>
             <p>  <textarea placeholder="write here" type="text" id="message" name="message"
                            style="width: 1000px; height: 100px;"></textarea>
             </p>
@@ -148,24 +157,12 @@
                  style="border: 4px dotted gray; min-width: 1000px; height: auto; min-height: 500px; overflow: scroll"
                  class="col-xs-12 col-sm-12 col-lg-12">
             </div>
-            <br />
-            <br />
+            <p></p>
             <h5 id="backgrounds">Backgrounds:</h5>
             <a id="clear" class="buttonClear" href="javascript:removeBg()">Clear background</a>
             <div id="previewBgr" style="margin-top: 8px; width:1000px; height: 64px;">&nbsp;</div>
             </p> <button type="button" id="showMore" class="btn btn-primary btn-xs js-scroll-trigger" onclick="showMoreBg()"> Показать больше фонов: </button>
             <div id="previewBgr2" style="margin-top: 8px; width:1000px; height: 64px;" class="hide">&nbsp;</div>
-            <br /><br />
-            <h5 id="letters">Letters:</h5>
-            <span id="textureText"></br>
-                Texture: </span> <input type="checkbox" checked="checked" id="stripe" name="stripe"
-                                        onchange="check()"> <br/>
-
-            <div id="previewLetterBgr" style="margin-top: 8px; width:1000px; height: 64px;">&nbsp;</div>
-            </p>
-            <div id="bgrFunctions" class="col-xs-12 col-sm-12 col-lg-12 text-center">
-
-            </div>
             <div class="col-xs-12 col-sm-12 col-lg-12 text-center">
                 <a style="width:350px; margin-top: 10px" class="btn btn-primary btn-xl js-scroll-trigger"
                    id="buttonSend"
@@ -177,31 +174,58 @@
 </section>
 
 <!-- Portfolio -->
-<section class="content-section" id="portfolio">
+
+<section data-bs-version="5" class="gallery2 cid-sGreVfOQoT" id="gallery2-k">
+
     <div class="container">
-        <div class="content-section-heading text-center">
-            <h2 id="gallery" class="mb-5">Gallery</h2>
+        <div class="mbr-section-head">
+            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2"></h4>
+            <h1>Gallery:</h1>
         </div>
-        <div class="row no-gutters">
-            <div class="col-lg-6">
-                <a class="portfolio-item" href="">
-                    <img class="img-fluid-gallery" src="" alt="">
-                </a>
+        <div class="row mt-4">
+            <div class="item features-image сol-12 col-md-6 col-lg-6">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        <a href="http://localhost:2369/sozdat-otkrytku/?lang=0&bgr=0&txtBgr=2&color=%23ff0000&sizeLetter=25&message=C+8+%D0%BC%D0%B0%D1%80%D1%82%D0%B0%21+&stripe=on">
+                            <img class="pic" src="https://sofia-shchur.github.io/pictures/8march.jpg">
+                        </a>
+                    </div>
+                    <div class="mbr-section-btn item-footer mt-2">
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6">
-                <a class="portfolio-item" href="index.html?lang=0&bgr=14&txtBgr=2&color=%23ff0000&sizeLetter=24&message=c+8+марта%21&stripe=on">
-                    <img class="img-fluid-gallery" src="pictures/8march.jpg" alt="">
-                </a>
+            <div class="item features-image сol-12 col-md-6 col-lg-6">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        <a href="http://localhost:2369/sozdat-otkrytku/?lang=0&bgr=6&txtBgr=0&color=%23ff0000&sizeLetter=15&message=%D1%81+%D0%B4%D0%BD%D1%91%D0%BC+%D0%B7%D0%BD%D0%B0%D0%BD%D0%B8%D0%B9%21+smilesymbol">
+                            <img class="pic" src="https://sofia-shchur.github.io/pictures/1sept.jpg">
+                        </a>
+                    </div>
+                    <div class="item-content">
+
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6">
-                <a class="portfolio-item" href="">
-                    <img class="img-fluid-gallery" src="" alt="">
-                </a>
+            <div class="item features-image сol-12 col-md-6 col-lg-6">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        <img class="pic" src="https://sofia-shchur.github.io/pictures/hbd.jpg">
+                    </div>
+                    <div class="item-content">
+
+                    </div>
+                    <div class="mbr-section-btn item-footer mt-2">
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6">
-                <a class="portfolio-item" href="">
-                    <img class="img-fluid-gallery" src="" alt="">
-                </a>
+            <div class="item features-image сol-12 col-md-6 col-lg-6">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        <img class="pic" src="https://sofia-shchur.github.io/pictures/hny.jpg" alt="" title="">
+                    </div>
+                    <div class="item-content">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
