@@ -99,22 +99,23 @@
             <input type="hidden" name="toRightVar" id="toRightVar" value="0">
             <input type="hidden" name="toDownVar" id="toDownVar" value="0">
             <input type="hidden" name="txtBgr" id="txtBgr" value="0">
+            <input type="hidden" name="filter" id="filter" value="">
             <div style="width: 1000px; height: 68px; ">
                 <a id='clearBtn' style="margin: 4px; font-size: 12px; width: 136px; height: 53px; float: left"
                    class="btn btn-primary btn-xl js-scroll-trigger"
                    href="javascript:clearAb()">Clear<i class="fa fa-eraser" aria-hidden="true"></i> </a>
                 <a id='toCenterLeft' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
                    class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
-                   href="javascript:toLeft()"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+                   href="javascript:toLeft('ab')"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
                 <a id='toCenterRight' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
                    class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
-                   href="javascript:toRight()"><i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
+                   href="javascript:toRight('ab')"><i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
                 <a id='toCenterDown' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
                    class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
-                   href="javascript:toDown()"><i class="fa fa-arrow-down" aria-hidden="true"></i> </a>
+                   href="javascript:toDown('ab')"><i class="fa fa-arrow-down" aria-hidden="true"></i> </a>
                 <a id='toCenterUp' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
                    class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
-                   href="javascript:toUp()"><i class="fa fa-arrow-up" aria-hidden="true"></i> </a>
+                   href="javascript:toUp('ab')"><i class="fa fa-arrow-up" aria-hidden="true"></i> </a>
                 <img id="heart" onclick='var e = document.getElementById("sizeLetter"); writePhrase("heartsymbol", "ab", e.options[e.selectedIndex].text)'
                      src="pictures/heart.png"
                      style="height: 64px; width: 64px; cursor: pointer">
@@ -122,15 +123,15 @@
                      src="pictures/smile.png"
                      style="height: 64px; width: 64px; cursor: pointer">
                 <div style="width: 320px; height: 68px; padding: 4px; float:right">
-                    <i id="colorText"> Color: </i> <input type="color" name="color" id="color" value="#ff0000"/>
+                    <i id="colorText"> Color: </i> <input type="color" name="color" id="color" value="#757575"/>
                     <i id="sizeText"> Size: </i>
                     <select id="sizeLetter" name="sizeLetter" onchange="newSizeAb()">
                         <option value="8">8</option>
                         <option value="10">10</option>
                         <option value="16">16</option>
-                        <option value="20" selected="selected">20</option>
+                        <option value="20">20</option>
                         <option value="24">24</option>
-                        <option value="32">32</option>
+                        <option value="32" selected="selected">32</option>
                         <option value="40">40</option>
                         <option value="48">48</option>
                         <option value="64">64</option>
@@ -144,8 +145,27 @@
             </div>
             <h5 id="letters">Letters:</h5>
             <span id="textureText"></br>
-                Texture: </span> <input type="checkbox" checked="checked" id="stripe" name="stripe"
-                                        onchange="check()"> <br/>
+                Texture: </span> <input type="checkbox" checked="checked" id="stripe" name="stripe">
+                Filters: <select id="filters">
+                <option>Choose filter</option>
+                <option value="0">Mix pictures version 1</option>
+                <option value="1">Mix pictures version 2</option>
+                <option value="2">Mix pictures version 3</option>
+                <option value="3">Zebra</option>
+                <option value="4">Zebra inside zebra</option>
+                <option value="5">Mix background of letters</option>
+                <option value="6">Blue fractals</option>
+                <option value="7">Red fractals</option>
+                <option value="8">Black fractals</option>
+                <option value="9">White fractals</option>
+                <option value="10">Yellow fractals</option>
+                <option value="11">Green fractals</option>
+                <option value="12">Snowflakes</option>
+                <option value="13">Black and white fractals zebra</option>
+                <option value="14">Blue wood</option>
+                <option value="15">Pink wood</option>
+                <option value="16">Green wood</option>
+            </select>
 
             <div id="previewLetterBgr" style="margin-top: 8px; width:1000px; height: 64px;">&nbsp;</div>
             <p><p/>
@@ -154,8 +174,7 @@
             </p>
             <p>
             <div id="ab"
-                 style="border: 4px dotted gray; min-width: 1000px; height: auto; min-height: 500px; overflow: scroll"
-                 class="col-xs-12 col-sm-12 col-lg-12">
+                 class="ab col-xs-12 col-sm-12 col-lg-12">
             </div>
             <p></p>
             <h5 id="backgrounds">Backgrounds:</h5>
