@@ -2,8 +2,6 @@ var toRightVar = 0;
 var toDownVar = 0;
 
 $(function () {
-
-    // $("#ab .line").draggable();
     window.backspaceActive = 0;
     document.getElementById('message').addEventListener('keydown', (event) => {
         if (event.key == 'Backspace') {
@@ -19,11 +17,10 @@ $(function () {
         }
     });
 
-
     document.getElementById('message').addEventListener('keypress', (event) => {
         var e = document.getElementById("sizeLetter");
         var lineWidth = e.options[e.selectedIndex].text;
-        console.log('listener kepress', event.key);
+        console.log('listener keypress', event.key);
         if (event.key == 'Enter') {
             $(document).unbind('keypress').bind('keypress', function (e) {
                 writePhrase(' ', 'ab', lineWidth);
@@ -36,9 +33,11 @@ $(function () {
         }
     });
 });
+
 let level = 1;
 let positionLeft = 0;
 var chbox = document.getElementById('stripe');
+var newSizeRun = false;
 
 function delLastSymbol() {
     var text = $("#message").val();
@@ -47,17 +46,11 @@ function delLastSymbol() {
     $("#ab").html("");
     var newText = text.substring(0, text.length - 1);
     console.log("newText", newText);
-
-    //setTimeout(function(){
     writePhrase(newText, 'ab', lineWidth);
-    //4422 $("#message").val(newText);
     if (chbox.checked) {
         $('.checkedImage').trigger('click');
     }
-    //},500)
 }
-
-var newSizeRun = false;
 
 function newSizeAb() {
     newSizeRun = true;
@@ -70,6 +63,11 @@ function newSizeAb() {
     if (chbox.checked) {
         $('.checkedImage').trigger('click');
     }
+    toRightVar = 0;
+    toDownVar = 0;
+    $('#toRightVar').val(toRightVar);
+    $('#toDownVar').val(toDownVar);
+    console.log("to right equal zero")
 }
 
 function clearAb() {
@@ -77,107 +75,82 @@ function clearAb() {
     $("#message").val("");
 }
 
-function toLeft() {
+function toLeft(curDiv) {
     var arrLetter = [];
-    $(".letterDiv").each(function (index, value) {
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         var position = $(this).position();
         arrLetter.push(position.left);
     });
 
-    $(".letterDiv").each(function (index, value) {
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         $(this).css({left: arrLetter[index] + -20, position: 'absolute'});
     });
     toRightVar--;
     $('#toRightVar').val(toRightVar);
 }
 
-
-function toRight() {
+function toRight(curDiv) {
     var arrLetter = [];
-
-    $(".letterDiv").each(function (index, value) {
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         var position = $(this).position();
-        console.log("position.left first loop", position.left);
         arrLetter.push(position.left);
     });
     /*
-        var minValue = Math.min.apply(null, arrLetter);
-        var maxValue = Math.max.apply(null, arrLetter);
-
-        console.log("minValue", minValue);
-        console.log("maxValue", maxValue);
-        var difValue = maxValue - minValue;
-        console.log("difValue", difValue);
-
-       // var leftOffset = (1000 - difValue) / 2 - 20 * 4 / 2;
-
-     */
-
-    $(".letterDiv").each(function (index, value) {
-        console.log("oldPosition !!!! " + index + " ", arrLetter[index]);
-        console.log("oldPosition.left + leftOffset", arrLetter[index]);
+            var minValue = Math.min.apply(null, arrLetter);
+            var maxValue = Math.max.apply(null, arrLetter);
+            console.log("minValue", minValue);
+            console.log("maxValue", maxValue);
+            var difValue = maxValue - minValue;
+            console.log("difValue", difValue);
+            var leftOffset = (1000 - difValue) / 2 - 20 * 4 / 2;
+    */
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         $(this).css({left: arrLetter[index] + 20, position: 'absolute'});
     });
     toRightVar++;
     $('#toRightVar').val(toRightVar);
 }
 
-function toUp() {
+function toUp(curDiv) {
     var arrLetter = [];
     var arrUp = [];
-
-    $(".letterDiv").each(function (index, value) {
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         var position = $(this).position();
         arrLetter.push(position.left);
     });
-
-    $(".letterDiv").each(function (index, value) {
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         $(this).css({left: arrLetter[index], position: 'absolute'});
     });
-
-    $(".letterDiv").each(function (index, value) {
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         var position = $(this).position();
         console.log("position.top ", position.top);
         arrUp.push(position.top);
     });
-
-    $(".letterDiv").each(function (index, value) {
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         $(this).css({top: arrUp[index] - 20, position: 'absolute'});
     });
-    // }, 500)
     toDownVar--;
     $('#toDownVar').val(toDownVar);
 }
 
-function toDown() {
-    console.log("!!!function toDown!!!");
+function toDown(curDiv) {
     var arrDownTop = [];
     var arrDown = [];
-
-    var testDownTop = []
-    // var testDownTop = []
-
-    $(".letterDiv").each(function (index, value) {
+    var testDownTop = [];
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         var position = $(this).position();
         arrDown.push(position.left);
     });
-
-    $(".letterDiv").each(function (index, value) {
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         $(this).css({left: arrDown[index], position: 'absolute'});
     });
-
-    $(".letterDiv").each(function (index, value) {
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         var position = $(this).position();
         var positionTest = $(this)[0].getBoundingClientRect();
-
-        console.log("position.top ", position.top);
         arrDownTop.push(position.top);
         testDownTop.push(positionTest.top);
-        console.log("arrDownTop", arrDownTop);
-        console.log("testDownTop", testDownTop);
     });
-
-    $(".letterDiv").each(function (index, value) {
+    $("#" + curDiv + " .letterDiv").each(function (index, value) {
         $(this).css({top: arrDownTop[index] + 20, position: 'absolute'});
     });
     toDownVar++;
@@ -189,10 +162,8 @@ function writePhrase(str, divId, lineWidth) {
     //https://unicode-table.com/en/
     str = str.replace(/heartsymbol/g, 'à');
     str = str.replace(/smilesymbol/g, 'á');
-
     if (str == "[keyspace]") {
         console.log('key SPACE!!');
-        writeLetter(spaceV, divId, lineWidth);
         writeLetter(spaceV, divId, lineWidth);
         writeLetter(spaceV, divId, lineWidth);
         $('#message').val($('#message').val() + '  ');
@@ -596,34 +567,26 @@ function writePhrase(str, divId, lineWidth) {
             }
         })
     }
-    if (chbox.checked) {
-        $('.checkedImage').trigger('click');
-    }
-    var i;
-    if ($_GET['toRightVar']) {
-        i = 0;
-        while(i<$_GET['toRightVar']){
-            toRight();
-            i++;
-        }
-    }
-
-    if ($_GET['toDownVar']) {
-        i = 0;
-        while(i<$_GET['toDownVar']){
-            toDown();
-            i++;
+    if ($("#filter").val() != "") {
+        console.log("filter", $("#filter").val());
+        var optionValue = $("#filter").val();
+        console.log("optionValue --->", optionValue);
+        setTimeout(() => {
+            window.applyFilter(optionValue, divId);
+        }, 100)
+    } else {
+        console.log("filter not found", $("#filter").val());
+        if (chbox.checked) {
+            $('.checkedImage').trigger('click');
         }
     }
 }
-//if ()
 
 var $_GET = [];
 window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (a, name, value) {
     $_GET[name] = value;
 });
 
-//get the 'index' query parameter
 if (typeof $_GET['color'] !== 'undefined') {
     pickerColor = $_GET['color'];
     if (pickerColor.indexOf('%23') > -1) {
@@ -632,15 +595,8 @@ if (typeof $_GET['color'] !== 'undefined') {
     $('#color').val(pickerColor);
 }
 
-
-//writeLetter([], "ab", false);
 function writeLetter(arr, divId, lineWidth) {
-    console.log('write letter');
-    let color = 'green';
-
     pickerColor = $('#color').val();
-    // console.log(pickerColor);
-
     let texture = '';
     if (!lineWidth) {
         if (chbox.checked) {
@@ -648,13 +604,9 @@ function writeLetter(arr, divId, lineWidth) {
         }
         var e = document.getElementById("sizeLetter");
         var lineWidth = e.options[e.selectedIndex].text;
-
     }
-
-    // var lineWidth = document.getElementByеId('sizeLetter').value;
     const width = arr[0].length * lineWidth;
     $("#" + divId + " .line").css({"width": lineWidth + "px", "height": lineWidth + "px"});
-    //$(".word").css({"width": width + "px"});
     const randNum = Math.floor(Math.random() * 1000000000);
 
     function newLine(level, randNum) {
@@ -668,7 +620,6 @@ function writeLetter(arr, divId, lineWidth) {
 
     // unique space for concrete letter
     $("#" + divId).append('<div class="letterDiv" id="a' + randNum + '" style="width:' + width + 'px; border: 0 solid white; height: 204; float: left"></div>');
-    // $('#a' + randNum).css({top: level * 100});
     var position = $('#a' + randNum).position();
     if (position.left < positionLeft && (window.backspaceActive == 0 && newSizeRun !== true)) {
         alertPRO();
@@ -687,38 +638,27 @@ function writeLetter(arr, divId, lineWidth) {
         }
         console.log("!!!! new line !!!!!");
     }
+
     positionLeft = position.left;
-    console.log("position.left");
-    console.log(position.left);
 
-
-    //$(".letterDiv").unwrap();
     $.each(arr, function (index, value) {
-        if (value[0] === 'h') {
-            $("#a" + randNum).append('<div style="border: 2px dotted white; width: ' + lineWidth * 6 + 'px; height: ' + lineWidth + 'px; background-color: #757575; float: left; position: relative;">&nbsp;</div>')
-        } else {
-            $.each(value, function (i, v) {
-                if (v.length === 4) {
-                    $("#a" + randNum).append('<div onclick="addDruggable($(this).parent().attr(\'id\'))" class="line" style="background-image: url(' + texture + '); background-color: ' + pickerColor + ';   width: ' + lineWidth + 'px; height: ' + lineWidth + 'px;border-radius:' + style(v) + '">&nbsp;</div>')
-                } else {
-                    $("#a" + randNum).append('<div style="width:' + lineWidth + 'px; height: ' + lineWidth + 'px; opacity: 0; float: left;">&nbsp;</div>')
-                }
-            });
-        }
+        $.each(value, function (i, v) {
+            if (v.length === 4) {
+                $("#a" + randNum).append('<div onclick="addDruggable($(this).parent().attr(\'id\'))" class="line" style="background-image: url(' + texture + '); background-size: 100% 100%; background-color: ' + pickerColor + ';   width: ' + lineWidth + 'px; height: ' + lineWidth + 'px;border-radius:' + style(v) + '">&nbsp;</div>')
+            } else {
+                $("#a" + randNum).append('<div style="width:' + lineWidth + 'px; height: ' + lineWidth + 'px; opacity: 0; float: left;">&nbsp;</div>')
+            }
+        });
+        //}
     });
-    console.log("write Letter end");
 }
 
 function addDruggable(divId) {
-
     $('#' + divId).draggable();
-
 }
-
 
 function showABC() {
     if (typeof $_GET['message'] !== 'undefined') {
-        //decodeURIComponent(text1)
         $_GET['message'] = decodeURI($_GET['message']);
         if ($_GET['message'].indexOf('+')) {
             $_GET['message'] = $_GET['message'].replace(/\+/g, ' ');
@@ -730,10 +670,6 @@ function showABC() {
             console.log('at found');
             $_GET['message'] = $_GET['message'].replace(/%40/g, 'Ф');
         }
-
-        /*  if ($_GET['message'].indexOf('%5C') > -1) {
-              $_GET['message'] = $_GET['message'].replace(/%5C/g, '\\');
-          }*/
     }
 }
 
@@ -775,18 +711,18 @@ if (typeof $_GET['bgr'] !== 'undefined') {
                 $("#myABC .line").css({"background-image": "url(" + bgrArr[$_GET['txtBgr']] + ")"});
             }
         }
+        if (typeof $_GET['filter'] !== 'undefined') {
+            window.applyFilter($_GET['filter'], 'myABC');
+        }
     });
 }
 
-
 if (typeof $_GET['message'] !== 'undefined') {
-    //
     showABC();
     hideH1();
     if ($_GET['message'].indexOf('%0D%0A') > -1) {
         $_GET['message'] = $_GET['message'].replace(/%0D%0A/g, '&nbsp; &nbsp; &nbsp;');
     }
-
     /* if ($_GET['message'].indexOf('heartsymbol') > -1 || $_GET['message'].indexOf('smilesymbol') > -1) {
 
          var symbolArr = $_GET['message'].split('symbol');
@@ -802,14 +738,31 @@ if (typeof $_GET['message'] !== 'undefined') {
      }*/
     // $_GET['message'] = $_GET['message'].replace(/symbol/g, '');
     writePhrase($_GET['message'], 'myABC', $_GET['sizeLetter']);
-
+    var i;
+    if ($_GET['toRightVar']) {
+        console.log("toRightVar -> ", toRightVar);
+        i = 0;
+        while (i < $_GET['toRightVar']) {
+            toRight("myABC");
+            i++;
+        }
+        toRightVar = 0;
+        console.log(toRightVar, 'found');
+    }
+    if ($_GET['toDownVar']) {
+        i = 0;
+        while (i < $_GET['toDownVar']) {
+            toDown("myABC");
+            i++;
+        }
+        toDownVar = 0;
+    }
 } else {
     hideABC();
 }
 
 function style(v) {
     var str = '';
-
     v.forEach(element => {
         if (element === 1) {
             str += '25px ';
@@ -817,51 +770,141 @@ function style(v) {
             str += '0 ';
         }
     });
-
     return str;
 }
 
-
-function check() {
-    if (chbox.checked) {
-        texture();
-    }
-}
-
-var bgPic = ['http://sofia-shchur.github.io/pictures/wall.jpg',
-    'http://sofia-shchur.github.io/pictures/stars.jpg',
-    'http://sofia-shchur.github.io/pictures/cosmo.jpg',
-    'http://sofia-shchur.github.io/pictures/flowers_pink.jpg',
-    'http://sofia-shchur.github.io/pictures/flowers_yellow.jpg',
-    'http://sofia-shchur.github.io/pictures/paper.jpg',
-    'http://sofia-shchur.github.io/pictures/line_paper.jpg',
-    'http://sofia-shchur.github.io/pictures/new_year.jpg',
-    'http://sofia-shchur.github.io/pictures/new_year2.jpg',
-    'http://sofia-shchur.github.io/pictures/strawberry.jpg',
-    'http://sofia-shchur.github.io/pictures/wallpaper.jpg',
-    'http://sofia-shchur.github.io/pictures/watermelon.jpg',
-    'http://sofia-shchur.github.io/pictures/pizza.jpg',
-    'http://sofia-shchur.github.io/pictures/eggs.jpg',
-    'http://sofia-shchur.github.io/pictures/heart_small.png',
+var fractalBlueArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/blue1.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/blue2.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/blue3.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/blue4.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/blue5.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/blue6.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/blue7.jpg',
 ];
 
-var bgPic2 = ['http://sofia-shchur.github.io/pictures/tulip.jpg',];
+// todo: create new Arrays (fractals, woods, stripes) sort by color
+// todo: create new Filters (or fix existing) using new Arrays (fractals, woods, stripes)
 
-var bgrArr = ['http://sofia-shchur.github.io/pictures/kitty.jpg',
-    'http://sofia-shchur.github.io/pictures/kitten.jpg',
-    'http://sofia-shchur.github.io/pictures/butterfly.jpg',
-    'http://sofia-shchur.github.io/pictures/lime.jpg',
-    'http://sofia-shchur.github.io/pictures/sun.jpg',
-    'http://sofia-shchur.github.io/pictures/heart_mini.jpg',
-    'http://sofia-shchur.github.io/pictures/sunset.jpg',
-    'http://sofia-shchur.github.io/pictures/pink.jpg',
-    'http://sofia-shchur.github.io/pictures/bluepinkflower.jpg',
-    'http://sofia-shchur.github.io/pictures/cat.jpg',
+var fractalRedArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/red1.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/red2.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/red3.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/red4.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/red5.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/red6.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/red7.jpg',
 ];
 
-function selectColor() {
-    $('input[name="color"]').val('red')
+var fractalBlackArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/black1.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/black2.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/black3.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/black4.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/black5.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/black6.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/black7.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/black8.jpg',
+];
+
+var fractalWhiteArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/white1.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/white2.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/white3.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/white4.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/white5.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/white6.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/white7.jpg',
+];
+
+var fractalYellowArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/yellow1.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow2.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow3.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow4.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow5.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow6.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow7.jpg',
+];
+
+var fractalGreenArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/green1.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/green2.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/green3.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/green4.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/green5.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/green6.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/fractals/green7.jpg',
+];
+
+var snowflakesArr = ['https://sofia-shchur.github.io/pictures/filters/snowf1.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/snowf2.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/snowf3.jpeg',
+    'https://sofia-shchur.github.io/pictures/filters/snowf4.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/snowf5.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/snowf6.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/snowf7.jpg',
+];
+
+var blueWoodArr = ['https://sofia-shchur.github.io/pictures/filters/bluewood1.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/bluewood2.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/bluewood3.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/bluewood4.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/bluewood5.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/bluewood6.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/bluewood7.jpg',
+];
+
+var pinkWoodArr = ['https://sofia-shchur.github.io/pictures/filters/pinkwood1.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/pinkwood2.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/pinkwood3.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/pinkwood4.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/pinkwood5.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/pinkwood6.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/pinkwood7.jpg',
+];
+
+var greenWoodArr = ['https://sofia-shchur.github.io/pictures/filters/greenwood1.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/greenwood2.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/greenwood3.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/greenwood4.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/greenwood5.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/greenwood6.jpg',
+    'https://sofia-shchur.github.io/pictures/filters/greenwood7.jpg',
+];
+
+var bgPic = ['http://sofia-shchur.github.io/pictures/backgrounds/cosmo.jpg',
+    'http://sofia-shchur.github.io/pictures/backgrounds/grass.jpg',
+    'http://sofia-shchur.github.io/pictures/backgrounds/waterBG.jpg',
+    'http://sofia-shchur.github.io/pictures/backgrounds/woods.jpg',
+    'http://sofia-shchur.github.io/pictures/backgrounds/snow.jpg',
+
+];
+
+var bgPic2 = ['http://sofia-shchur.github.io/pictures/backgrounds/heart_small.png',
+    'http://sofia-shchur.github.io/pictures/backgrounds/flowers_pink.jpg',
+    'http://sofia-shchur.github.io/pictures/backgrounds/strawberry.jpg',
+];
+
+var bgrArr = [ 'http://sofia-shchur.github.io/pictures/texture/flower.png',
+    'http://sofia-shchur.github.io/pictures/texture/fish.png',
+    'http://sofia-shchur.github.io/pictures/texture/leaf.png',
+    'http://sofia-shchur.github.io/pictures/texture/star.png',
+    'http://sofia-shchur.github.io/pictures/texture/snowflake.gif',
+    'http://sofia-shchur.github.io/pictures/texture/heart_mini.jpg',
+    'http://sofia-shchur.github.io/pictures/texture/butterfly.jpg',
+    'http://sofia-shchur.github.io/pictures/texture/water.jpg',
+    'http://sofia-shchur.github.io/pictures/texture/kitten.jpg',
+];
+
+function messageEmptyCheck() {
+    //return;
+    //fix messageEmptyCheck() for all situations;
+    /*console.log("message " + $("#message").val(), $("#message").val().length);
+    setTimeout(()=>{
+        if (!$("#message").val().length) {
+            $("#message").val('text');
+            $("#ab").html('');
+            writePhrase('text', 'ab', 20)
+        }
+    }, 500)*/
 }
+
+var array3 = bgPic.concat(bgrArr);
 
 function validateMessage(formElement) {
     if ($('#message').val()) {
@@ -872,30 +915,315 @@ function validateMessage(formElement) {
     }
 }
 
-
 function changeBgr(src, bgrId) {
-    $("#ab").css({"background-size": "80%", "background-image": "url(" + src + ")"});
-
+    $("#ab").css({"background-size": "100%", "background-image": "url(" + src + ")"});
     var num = bgrId.replace("bgr_", "");
-
     $('#bgr').val(num);
+}
 
-    /* var c = 30;
-     if(typeof interval !== 'undefined'){
-         clearInterval(interval)
-     }
-     var interval = setInterval(function () {
-         if (c == 10) {
-             c = 0
-         }
-         $(".picTexture").css({"background-size": c * 100 + "%"});
-         c++;
-     }, 1000)*/
+//<i id="colorText"> Color: </i> <input type="color" name="color" id="color" value="#757575"/>
+
+
+function mixLetterZebraFilter(curDiv) {
+    let c = 0
+    let idDiv;
+    mixPicturesFractalsFilter(curDiv);
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+
+        var checkSpace = c % 4;
+        if (!checkSpace) {
+            idDiv = $(val).attr('id');
+            $("#" + idDiv + " .line").addClass("zebra");
+            $("#" + idDiv + " .zebra").css({"background-image": "url(" + array3[1] + ")"});
+        }
+
+        if ($("#" + idDiv).children().hasClass("line")) {
+            c++;
+        }
+    })
+    console.log("Im Zebra(")
+}
+
+function mixBgFilter(curDiv) {
+    let c = 0;
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": "url(" + array3[c] + ")"});
+        c++;
+    })
+}
+
+function zebraInsideZebraFilter(curDiv) {
+    var picFirst = array3[0];
+    var picSecond = array3[1];
+    var curTop = 0;
+    var c = 0;
+    var position = 0;
+    mixLetterZebraFilter(curDiv);
+    $("#" + curDiv + " .zebra").each((index, val) => {
+        position = $(val).position();
+        if (position.top > curTop) {
+            c++;
+        }
+        if (position.top < curTop) {
+            c = 1;
+        }
+        curTop = position.top;
+        $(val).css({"background-image": "url(" + picFirst + ")"});
+        if (c % 2) {
+            $(val).css({"background-image": "url(" + picSecond + ")"});
+            //$(val).hide("explode", {pieces: 9}, 1000);
+        }
+    })
+}
+
+/*class Book {
+    constructor(title, pages, price) {
+        this.title = title;
+        this.pages = pages;
+        this.price = price;
+    }
+
+}*/
+
+function mixPicturesVersion1Filter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    console.log("first filter");
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > bgrArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + bgrArr[c] + ")"});
+        c++;
+    })
+}
+
+function mixPicturesVersion2Filter(curDiv) {
+    console.log($("#" + curDiv + " .line"));
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > bgPic.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + bgPic[c] + ")"});
+        c++;
+    })
+}
+
+function mixPicturesVersion3Filter(curDiv) {
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > array3.length - 1) {
+            c = 0;
+        }
+        /** Example **
+         c2 = c;
+         if (c % 2) {
+                c2--;
+            }
+         $(val).css({"background-image": "url(" + array3[c2] + ")"});
+         */
+        $(val).css({"background-image": "url(" + array3[c] + ")"});
+        c++;
+    })
+}
+
+function mixPicturesFractalsFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > fractalWhiteArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + fractalWhiteArr[c] + ")"});
+        c++;
+    })
+
+}
+
+function fractalBlueArrayFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > fractalBlueArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + fractalBlueArr[c] + ")"});
+        c++;
+    })
+}
+
+function fractalRedArrayFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > fractalRedArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + fractalRedArr[c] + ")"});
+        c++;
+    })
+}
+
+function fractalBlackArrayFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > fractalBlackArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + fractalBlackArr[c] + ")"});
+        c++;
+    })
+}
+
+function fractalWhiteArrayFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > fractalWhiteArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + fractalWhiteArr[c] + ")"});
+        c++;
+    })
+}
+
+function fractalYellowArrayFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > fractalYellowArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + fractalYellowArr[c] + ")"});
+        c++;
+    })
+}
+
+function fractalGreenArrayFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > fractalGreenArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + fractalGreenArr[c] + ")"});
+        c++;
+    })
+}
+
+function snowflakesArrayFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > snowflakesArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + snowflakesArr[c] + ")"});
+        c++;
+    })
+}
+
+function blueWoodArrayFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > blueWoodArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + blueWoodArr[c] + ")"});
+        c++;
+    })
+}
+
+function pinkWoodArrayFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > pinkWoodArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + pinkWoodArr[c] + ")"});
+        c++;
+    })
+}
+
+function greenWoodArrayFilter(curDiv) {
+    //remove bgr
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
+    var c = 0;
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > greenWoodArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + greenWoodArr[c] + ")"});
+        c++;
+    })
+}
+
+function fractalBlackRedArrayFilter(curDiv) {
+    var picFirst = fractalWhiteArr[1];
+    var picSecond = fractalBlackArr[0];
+    var curTop = 0;
+    var c = 0;
+    var position = 0;
+    mixLetterZebraFilter(curDiv);
+    $("#" + curDiv + " .zebra").each((index, val) => {
+        position = $(val).position();
+        if (position.top > curTop) {
+            c++;
+        }
+        if (position.top < curTop) {
+            c = 1;
+        }
+        curTop = position.top;
+        $(val).css({"background-image": "url(" + picFirst + ")"});
+        if (c % 2) {
+            $(val).css({"background-image": "url(" + picSecond + ")"});
+        }
+    })
 }
 
 function changeLettersBgr(srcBg, bgrLetterId) {
     if (document.getElementById('stripe').checked) {
         $("#ab .line").css({"background-image": "url(" + srcBg + ")"});
+        $("#ab .line").css({"background-color": "rgba(156, 22, 181, 0)"});
     }
     console.log(bgrLetterId);
     var num = bgrLetterId.replace("img_", "");
@@ -905,13 +1233,49 @@ function changeLettersBgr(srcBg, bgrLetterId) {
 }
 
 function removeBg() {
-    console.log('removeBgr');
     $("#ab").css({"background-image": "url('')"});
 }
 
+window.applyFilter = function (optionValue, curDiv) {
+    // ---- apply filter function
+    if (optionValue == 0) {
+        mixPicturesVersion1Filter(curDiv);
+    } else if (optionValue == 1) {
+        mixPicturesVersion2Filter(curDiv);
+    } else if (optionValue == 2) {
+        mixPicturesVersion3Filter(curDiv);
+    } else if (optionValue == 3) {
+        mixLetterZebraFilter(curDiv);
+    } else if (optionValue == 4) {
+        zebraInsideZebraFilter(curDiv);
+    } else if (optionValue == 5) {
+        mixBgFilter(curDiv);
+    } else if (optionValue == 6) {
+        fractalBlueArrayFilter(curDiv);
+    } else if (optionValue == 7) {
+        fractalRedArrayFilter(curDiv);
+    } else if (optionValue == 8) {
+        fractalBlackArrayFilter(curDiv);
+    } else if (optionValue == 9) {
+        fractalWhiteArrayFilter(curDiv);
+    } else if (optionValue == 10) {
+        fractalYellowArrayFilter(curDiv);
+    } else if (optionValue == 11) {
+        fractalGreenArrayFilter(curDiv);
+    } else if (optionValue == 12) {
+        snowflakesArrayFilter(curDiv);
+    } else if (optionValue == 13) {
+        fractalBlackRedArrayFilter(curDiv);
+    } else if (optionValue == 14) {
+        blueWoodArrayFilter(curDiv);
+    } else if (optionValue == 15) {
+        pinkWoodArrayFilter(curDiv);
+    } else if (optionValue == 16) {
+        greenWoodArrayFilter(curDiv);
+    }
+}
 
 $(function () {
-
     if (typeof $_GET['lang'] !== 'undefined') {
         console.log("lang found doc ready");
         if ($_GET['lang'] == 1) {
@@ -930,6 +1294,15 @@ $(function () {
         $("#previewLetterBgr").append("<img onclick='changeLettersBgr(this.src, this.id);' id='img_" + j + "' style='height: 64px; width: 64px; cursor: pointer' src='" + bgrArr[j] + "'/>")
     }
     $("#img_0").addClass("checkedImage");
+
+    $('#filters').change(function () {
+        $('#stripe').attr('checked', false);
+        const optionValue = $("#filters option:selected").val();
+        console.log("optionValue", optionValue);
+        messageEmptyCheck();
+        $('#filter').val(optionValue);
+        window.applyFilter(optionValue, 'ab');
+    });
 })
 
 const showMoreBg = () => {
@@ -959,14 +1332,12 @@ translate['letters'] = [['Letters:'], ['Буквы:']];
 translate['backgrounds'] = [['Backgrounds:'], ['Фон:']];
 translate['gallery'] = [['Gallery'], ['Галерея']];
 
-
 function translateFn(lang) {
     for (let i in translate) {
         $('#' + i).html(translate[i][lang]);
     }
     $('#lang').val(lang);
 }
-
 
 translateFn(0);
 
