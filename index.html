@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,66 +65,82 @@
 
 </nav>
 <!-- Header -->
-<header class="masthead d-flex">
+<header class="masthead d-flex content-section">
+    <!--<section class="" id="about2">-->
 
-    <div class="container text-center my-auto">
-        <div style="display: block; margin-top: -70px;  padding: 10px; background: rgba(255,255,255,0.5); border: 4px dotted gray; width: 1000px; height: auto; min-height: 500px; overflow: scroll"
-             id="myABC">
+
+        <div class="container text-center my-auto">
+            <div style="display: block; margin-top: -70px;  padding: 10px; background: rgba(255,255,255,0.5); border: 4px dotted gray; width: 1000px; height: auto; min-height: 500px; overflow: scroll"
+                 id="myABC">
+            </div>
+            <div id="commentMessage" style="width: 1000px; height: auto; min-height: 50px; text-align: left; padding-top: 15px;"></div>
+            <a class="btn btn-mySend btn-xl js-scroll-trigger" style="width: 300px; margin: auto;" href="#about"
+               id="createCard">Create Your Card! </a></br></br>
+            <!--        <button id="myButtonHide">Hide div</button>-->
+            <!--        <button id="myButtonShow">Show div</button> -->
+
+
+            <h1 class="mb-1" id="greetHeader">Greetings Cards</h1>
+            <h3 class="mb-5" id="miniHeader">
+                <em>Best online Greetings Service</em>
+            </h3>
+            <br/>
+
         </div>
-
-        <a class="btn btn-primary btn-xl js-scroll-trigger" style="width: 300px; margin: auto;" href="#about"
-           id="createCard">Create Your Card! </a></br></br>
-        <!--        <button id="myButtonHide">Hide div</button>-->
-        <!--        <button id="myButtonShow">Show div</button> -->
-
-
-        <h1 class="mb-1" id="greetHeader">Greetings Cards</h1>
-        <h3 class="mb-5" id="miniHeader">
-            <em>Best online Greetings Service</em>
-        </h3>
-        <br/>
-
-    </div>
-    <div class="overlay"></div>
+        <div class="overlay"></div>
+   <!-- </section>-->
 </header>
 
 <!-- About -->
-<section class="content-section bg-light" id="about">
-    <form id="sendCardForm" action="index.html" method="get">
-        <div class="container">
+<div class="contentStyle" id="divDivider" style="background-image: url('http://sofia-shchur.github.io/pictures/dividerline.png'); background-position: center center; background-size: contain;
+">
+    <br/>
+    <br/>
+
+</div>
+
+<section class="content-section contentStyle" id="about">
+    <form id="sendCardForm" action="index.html" method="get"
+          style="background-image: url('http://sofia-shchur.github.io/pictures/background_card.jpg'); background-size: cover; background-repeat: no-repeat">
+        <br/>
+        <div class="container containerStyle">
+            <br/>
             <h1 id="createCardHeader">Create your card</h1>
             <input type="hidden" name="lang" id="lang">
             <input type="hidden" name="bgr" id="bgr">
+            <input type="hidden" name="bgrArrNum" id="bgrArrNum" value="0">
             <input type="hidden" name="toRightVar" id="toRightVar" value="0">
             <input type="hidden" name="toDownVar" id="toDownVar" value="0">
             <input type="hidden" name="txtBgr" id="txtBgr" value="0">
             <input type="hidden" name="filter" id="filter" value="">
+            <input type="hidden" name="comment" id="comment" value="">
             <div style="width: 1000px; height: 68px; ">
-                <a id='clearBtn' style="margin: 4px; font-size: 12px; width: 136px; height: 53px; float: left"
-                   class="btn btn-primary btn-xl js-scroll-trigger"
+                <a id='clearBtn' style="margin: 3px; font-size: 12px; width: 136px; height: 53px; float: left"
+                   class="btn btn-myCustom btn-xl js-scroll-trigger"
                    href="javascript:clearAb()">Clear<i class="fa fa-eraser" aria-hidden="true"></i> </a>
-                <a id='toCenterLeft' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
-                   class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
+                <a id='toCenterLeft' style="margin: 3px; font-size: 12px; width: 70px; height: 53px; float: left"
+                   class="btn btn-myCustom btn-xl js-scroll-trigger arrowsForText"
                    href="javascript:toLeft('ab')"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
-                <a id='toCenterRight' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
-                   class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
+                <a id='toCenterRight' style="margin: 3px; font-size: 12px; width: 70px; height: 53px; float: left"
+                   class="btn btn-myCustom btn-xl js-scroll-trigger arrowsForText"
                    href="javascript:toRight('ab')"><i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
-                <a id='toCenterDown' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
-                   class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
+                <a id='toCenterDown' style="margin: 3px; font-size: 12px; width: 70px; height: 53px; float: left"
+                   class="btn btn-myCustom btn-xl js-scroll-trigger arrowsForText"
                    href="javascript:toDown('ab')"><i class="fa fa-arrow-down" aria-hidden="true"></i> </a>
-                <a id='toCenterUp' style="margin: 4px; font-size: 12px; width: 70px; height: 53px; float: left"
-                   class="btn btn-primary btn-xl js-scroll-trigger arrowsForText"
+                <a id='toCenterUp' style="margin: 3px; font-size: 12px; width: 70px; height: 53px; float: left"
+                   class="btn btn-myCustom btn-xl js-scroll-trigger arrowsForText"
                    href="javascript:toUp('ab')"><i class="fa fa-arrow-up" aria-hidden="true"></i> </a>
-                <img id="heart" onclick='var e = document.getElementById("sizeLetter"); writePhrase("heartsymbol", "ab", e.options[e.selectedIndex].text)'
+                <img id="heart"
+                     onclick='var e = document.getElementById("sizeLetter"); writePhrase("heartsymbol", "ab", e.options[e.selectedIndex].text)'
                      src="pictures/heart.png"
                      style="height: 64px; width: 64px; cursor: pointer">
                 <img onclick='var e = document.getElementById("sizeLetter"); writePhrase("smilesymbol", "ab", e.options[e.selectedIndex].text)'
-                     src="pictures/smile.png"
+                     src="pictures/smiled.png"
                      style="height: 64px; width: 64px; cursor: pointer">
                 <div style="width: 320px; height: 68px; padding: 4px; float:right">
-                    <i id="colorText"> Color: </i> <input type="color" name="color" id="color" value="#757575"/>
-                    <i id="sizeText"> Size: </i>
-                    <select id="sizeLetter" name="sizeLetter" onchange="newSizeAb()">
+                    <span id="colorText"> Color:> </span> <input type="color" name="color" id="color" value="#757575"/>
+                    <span id="sizeText"> Size: </span>
+                    <select style="border-radius: 10px;" id="sizeLetter" name="sizeLetter" onchange="newSizeAb()">
                         <option value="8">8</option>
                         <option value="10">10</option>
                         <option value="16">16</option>
@@ -146,51 +161,61 @@
             <h5 id="letters">Letters:</h5>
             <span id="textureText"></br>
                 Texture: </span> <input type="checkbox" checked="checked" id="stripe" name="stripe">
-                Filters: <select id="filters">
-                <option>Choose filter</option>
-                <option value="0">Mix pictures version 1</option>
-                <option value="1">Mix pictures version 2</option>
-                <option value="2">Mix pictures version 3</option>
-                <option value="3">Zebra</option>
-                <option value="4">Zebra inside zebra</option>
-                <option value="5">Mix background of letters</option>
-                <option value="6">Blue fractals</option>
-                <option value="7">Red fractals</option>
-                <option value="8">Black fractals</option>
-                <option value="9">White fractals</option>
-                <option value="10">Yellow fractals</option>
-                <option value="11">Green fractals</option>
-                <option value="12">Snowflakes</option>
-                <option value="13">Black and white fractals zebra</option>
-                <option value="14">Blue wood</option>
-                <option value="15">Pink wood</option>
-                <option value="16">Green wood</option>
-            </select>
+            Filters: <select style="border-radius: 5px;" id="filters">
+            <option>Choose filter</option>
+            <option value="0">Mix pictures version 1</option>
+            <option value="1">Mix pictures version 2</option>
+            <option value="2">Mix pictures version 3</option>
+            <option value="3">Zebra</option>
+            <option value="4">Zebra inside zebra</option>
+            <option value="5">Mix background of letters</option>
+            <option value="6">Blue fractals</option>
+            <option value="7">Red fractals</option>
+            <option value="8">Black fractals</option>
+            <option value="9">White fractals</option>
+            <option value="10">Yellow fractals</option>
+            <option value="11">Green fractals</option>
+            <option value="12">Snowflakes</option>
+            <option value="13">Black and white fractals zebra</option>
+            <option value="14">Blue wood</option>
+            <option value="15">Pink wood</option>
+            <option value="16">Green wood</option>
+            <option value="17">White letters in desert</option>
+            <option value="18">Zebra rotate</option>
+            <option value="19">Rotate</option>
+        </select>
 
             <div id="previewLetterBgr" style="margin-top: 8px; width:1000px; height: 64px;">&nbsp;</div>
-            <p><p/>
+            <p>
+            <p/>
             <p>  <textarea placeholder="write here" type="text" id="message" name="message"
                            style="width: 1000px; height: 100px;"></textarea>
             </p>
             <p>
             <div id="ab"
-                 class="ab col-xs-12 col-sm-12 col-lg-12">
+                 class="ab">
             </div>
             <p></p>
             <h5 id="backgrounds">Backgrounds:</h5>
             <a id="clear" class="buttonClear" href="javascript:removeBg()">Clear background</a>
             <div id="previewBgr" style="margin-top: 8px; width:1000px; height: 64px;">&nbsp;</div>
-            </p> <button type="button" id="showMore" class="btn btn-primary btn-xs js-scroll-trigger" onclick="showMoreBg()"> Показать больше фонов: </button>
+            </p>
+            <button type="button" id="showMore" class="btn btn-myCustom btn-xs js-scroll-trigger"
+                    onclick="showMoreBg()"> Показать больше фонов:
+            </button>
             <div id="previewBgr2" style="margin-top: 8px; width:1000px; height: 64px;" class="hide">&nbsp;</div>
             <div class="col-xs-12 col-sm-12 col-lg-12 text-center">
-                <a style="width:350px; margin-top: 10px" class="btn btn-primary btn-xl js-scroll-trigger"
+                <a style="width:350px; margin-top: 10px" class="btn btn-mySend btn-xl js-scroll-trigger"
                    id="buttonSend"
                    onclick="validateMessage(this);" href="javascript:void(0)"> SEND YOUR CARD!
                 </a>
             </div>
+            <br/>
         </div>
+        <br/>
     </form>
 </section>
+
 
 <!-- Portfolio -->
 
@@ -202,22 +227,22 @@
             <h1>Gallery:</h1>
         </div>
         <div class="row mt-4">
-            <div class="item features-image сol-12 col-md-6 col-lg-6">
+            <div class="item features-image сol-6 col-md-6 col-lg-6">
                 <div class="item-wrapper">
                     <div class="item-img">
-                        <a href="">
-                            <img class="pic" src="">
+                        <a href="http://localhost:63342/cards/yellow/index.html?lang=0&bgr=5&bgrArrNum=0&toRightVar=3&toDownVar=8&txtBgr=8&&color=%23757575&sizeLetter=16&stripe=on&message=happy+new+year%21+">
+                            <img class="pic" src="http://sofia-shchur.github.io/pictures/hny.png">
                         </a>
                     </div>
                     <div class="mbr-section-btn item-footer mt-2">
                     </div>
                 </div>
             </div>
-            <div class="item features-image сol-12 col-md-6 col-lg-6">
+            <div class="item features-image сol-6 col-md-6 col-lg-6">
                 <div class="item-wrapper">
                     <div class="item-img">
-                        <a href="">
-                            <img class="pic" src="">
+                        <a href="http://localhost:63342/cards/yellow/index.html?lang=0&bgr=1&bgrArrNum=0&toRightVar=2&toDownVar=6&txtBgr=0&filter=&color=%23757575&sizeLetter=24&stripe=on&message=%D1%81+8+%D0%BC%D0%B0%D1%80%D1%82%D0%B0+heartsymbol">
+                            <img class="pic" src="http://sofia-shchur.github.io/pictures/8march.png">
                         </a>
                     </div>
                     <div class="item-content">
@@ -225,10 +250,12 @@
                     </div>
                 </div>
             </div>
-            <div class="item features-image сol-12 col-md-6 col-lg-6">
+            <div class="item features-image сol-6 col-md-6 col-lg-6">
                 <div class="item-wrapper">
                     <div class="item-img">
-                        <img class="pic" src="">
+                        <a href="http://localhost:63342/cards/yellow/index.html?lang=0&bgr=2&bgrArrNum=0&toRightVar=2&toDownVar=1&txtBgr=1&filter=&color=%23757575&sizeLetter=32&stripe=on&message=%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82+%21">
+                            <img class="pic" src="http://sofia-shchur.github.io/pictures/hello.png">
+                        </a>
                     </div>
                     <div class="item-content">
 
@@ -237,10 +264,12 @@
                     </div>
                 </div>
             </div>
-            <div class="item features-image сol-12 col-md-6 col-lg-6">
+            <div class="item features-image сol-6 col-md-6 col-lg-6">
                 <div class="item-wrapper">
                     <div class="item-img">
-                        <img class="pic" src="" alt="" title="">
+                        <a href="http://localhost:63342/cards/yellow/index.html?lang=0&bgr=0&bgrArrNum=0&toRightVar=3&toDownVar=3&txtBgr=0&filter=6&color=%23757575&sizeLetter=40&message=Hello%21">
+                            <img class="pic" src="http://sofia-shchur.github.io/pictures/hello2.png">
+                        </a>
                     </div>
                     <div class="item-content">
                     </div>
