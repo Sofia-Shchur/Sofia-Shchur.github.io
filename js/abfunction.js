@@ -1,8 +1,28 @@
-var toRightVar = 0;
-var toDownVar = 0;
+//variables
+let toRightVar = 0;
+let toDownVar = 0;
+let level = 1;
+let positionLeft = 0;
+let chbox = document.getElementById('stripe');
+let newSizeRun = false;
 
+//event listeners for keydown and keypress - backspace, enter
 $(function () {
     window.backspaceActive = 0;
+    /** $(".line").mouseover(function (el) {
+        $(this).css({"box-shadow": "5px 5px 7px #000000"});
+        console.log("line")
+    });
+
+     $(".line").mouseout(function (el) {
+        $(this).css({"box-shadow": "2px 2px 4px #000000"});
+        console.log("line")
+    });
+
+     $('.line').mouseover(function() {
+        $(this).css({'transform' : 'rotate(45deg)'});
+    }); **/
+
     document.getElementById('message').addEventListener('keydown', (event) => {
         if (event.key == 'Backspace') {
             window.backspaceActive = 1;
@@ -16,6 +36,13 @@ $(function () {
             window.backspaceActive = 0;
         }
     });
+
+    document.getElementById('message').addEventListener( 'keypress', (event)=>{
+        if (event.code == 'Space') {
+            linesCount();
+        }
+    });
+    //linesCount();
 
     document.getElementById('message').addEventListener('keypress', (event) => {
         var e = document.getElementById("sizeLetter");
@@ -34,11 +61,7 @@ $(function () {
     });
 });
 
-let level = 1;
-let positionLeft = 0;
-var chbox = document.getElementById('stripe');
-var newSizeRun = false;
-
+//remove the last symbol in textarea and AB-div
 function delLastSymbol() {
     var text = $("#message").val();
     var e = document.getElementById("sizeLetter");
@@ -52,6 +75,7 @@ function delLastSymbol() {
     }
 }
 
+//resize symbol
 function newSizeAb() {
     newSizeRun = true;
     var text = $("#message").val();
@@ -70,11 +94,13 @@ function newSizeAb() {
     console.log("to right equal zero")
 }
 
+//clear textarea and AB-div
 function clearAb() {
     $("#ab").html("");
     $("#message").val("");
 }
 
+//function for arrow "to left"
 function toLeft(curDiv) {
     var arrLetter = [];
     $("#" + curDiv + " .letterDiv").each(function (index, value) {
@@ -89,21 +115,20 @@ function toLeft(curDiv) {
     $('#toRightVar').val(toRightVar);
 }
 
+//function for arrow "to right"
 function toRight(curDiv) {
     var arrLetter = [];
     $("#" + curDiv + " .letterDiv").each(function (index, value) {
         var position = $(this).position();
         arrLetter.push(position.left);
     });
-    /*
-            var minValue = Math.min.apply(null, arrLetter);
+    /*      var minValue = Math.min.apply(null, arrLetter);
             var maxValue = Math.max.apply(null, arrLetter);
             console.log("minValue", minValue);
             console.log("maxValue", maxValue);
             var difValue = maxValue - minValue;
             console.log("difValue", difValue);
-            var leftOffset = (1000 - difValue) / 2 - 20 * 4 / 2;
-    */
+            var leftOffset = (1000 - difValue) / 2 - 20 * 4 / 2;    */
     $("#" + curDiv + " .letterDiv").each(function (index, value) {
         $(this).css({left: arrLetter[index] + 20, position: 'absolute'});
     });
@@ -111,6 +136,7 @@ function toRight(curDiv) {
     $('#toRightVar').val(toRightVar);
 }
 
+//function for arrow "to up"
 function toUp(curDiv) {
     var arrLetter = [];
     var arrUp = [];
@@ -133,6 +159,7 @@ function toUp(curDiv) {
     $('#toDownVar').val(toDownVar);
 }
 
+//function for arrow "to down"
 function toDown(curDiv) {
     var arrDownTop = [];
     var arrDown = [];
@@ -157,6 +184,7 @@ function toDown(curDiv) {
     $('#toDownVar').val(toDownVar);
 }
 
+//function for write text
 function writePhrase(str, divId, lineWidth) {
     str = str.toLowerCase();
     //https://unicode-table.com/en/
@@ -164,6 +192,7 @@ function writePhrase(str, divId, lineWidth) {
     str = str.replace(/smilesymbol/g, 'á');
     if (str == "[keyspace]") {
         console.log('key SPACE!!');
+        writeLetter(spaceV, divId, lineWidth);
         writeLetter(spaceV, divId, lineWidth);
         writeLetter(spaceV, divId, lineWidth);
         $('#message').val($('#message').val() + '  ');
@@ -582,19 +611,24 @@ function writePhrase(str, divId, lineWidth) {
     }
 }
 
+//GET-variable
 var $_GET = [];
 window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (a, name, value) {
     $_GET[name] = value;
 });
 
+//GET-variable for color of letters
 if (typeof $_GET['color'] !== 'undefined') {
-    pickerColor = $_GET['color'];
+    if ($_GET['color']) {
+        pickerColor = $_GET['color'];
+    }
     if (pickerColor.indexOf('%23') > -1) {
         pickerColor = pickerColor.replace(/%23/g, '#')
     }
     $('#color').val(pickerColor);
 }
 
+//function for write letters
 function writeLetter(arr, divId, lineWidth) {
     pickerColor = $('#color').val();
     let texture = '';
@@ -609,34 +643,13 @@ function writeLetter(arr, divId, lineWidth) {
     $("#" + divId + " .line").css({"width": lineWidth + "px", "height": lineWidth + "px"});
     const randNum = Math.floor(Math.random() * 1000000000);
 
-    function newLine(level, randNum) {
-        $('#a' + randNum).addClass('level_' + level);
-        $(document).keypress(function (e) {
-            if (e.which == 13) {
-                writePhrase("\n", ab, lineWidth);
-            }
-        });
-    }
-
     // unique space for concrete letter
     $("#" + divId).append('<div class="letterDiv" id="a' + randNum + '" style="width:' + width + 'px; border: 0 solid white; height: 204; float: left"></div>');
     var position = $('#a' + randNum).position();
     if (position.left < positionLeft && (window.backspaceActive == 0 && newSizeRun !== true)) {
-        alertPRO();
-    }
-
-    function alertPRO() {
-        if ($_GET['message']) {
-            return;
-        } else {
-            alert('Ввод большого количества текста доступен в PRO-версии!');
-            setTimeout(function () {
-                $(".letterDiv").hide("explode", {pieces: 9}, 1000);
-                clearAb();
-                positionLeft = 0;
-            }, 1000);
-        }
-        console.log("!!!! new line !!!!!");
+        // alertPRO();
+        // todo : decide situation with broken position when we use arrows for moving text
+        // todo : refactor - replace all decorative arrays (woods, fractals) in new file
     }
 
     positionLeft = position.left;
@@ -649,27 +662,77 @@ function writeLetter(arr, divId, lineWidth) {
                 $("#a" + randNum).append('<div style="width:' + lineWidth + 'px; height: ' + lineWidth + 'px; opacity: 0; float: left;">&nbsp;</div>')
             }
         });
-        //}
     });
 }
 
+//alert for pro-version
+function alertPRO() {
+    if ($_GET['message']) {
+        return;
+    } else {
+        alert('Ввод большого количества текста доступен в PRO-версии!');
+        setTimeout(function () {
+            $(".letterDiv").hide("explode", {pieces: 9}, 1000);
+            clearAb();
+            positionLeft = 0;
+        }, 1000);
+    }
+    console.log("!!!! new line !!!!!");
+}
+
+function linesCount() {
+    let rowCount = 0;
+    let oldTop = 0;
+    let positionRow;
+    console.log("!!!!!!!!! we count lines");
+    var e = document.getElementById("sizeLetter");
+    var lineWidth = e.options[e.selectedIndex].text;
+
+
+    $("#ab .line").each((index, val) => {
+        positionRow = $(val).position();
+        if (positionRow.top > oldTop) {
+            console.log("positionRow.top > oldTop");
+            console.log(positionRow.top , oldTop);
+            console.log("positionRow.top - oldTop, lineWidth / 1");
+            console.log(positionRow.top - oldTop, lineWidth / 1);
+            if (positionRow.top - oldTop > lineWidth * 2) {
+                rowCount++;
+                console.log("linesCount rowCount", rowCount);
+            }
+            oldTop = positionRow.top;
+        }else{
+            console.log("positionRow.top == oldTop");
+            console.log(positionRow.top , oldTop);
+        }
+
+        if (rowCount > 3) {
+            rowCount = 0;
+            alert("rowCount > 3");
+            // todo: dont allow write more.
+
+            // alertPRO();
+        }
+    })
+}
+
+//draggable in letters
 function addDruggable(divId) {
     $('#' + divId).draggable();
 }
 
+//change title to div-myABC
 function showABC() {
-    if (typeof $_GET['message'] !== 'undefined') {
-        $_GET['message'] = decodeURI($_GET['message']);
-        if ($_GET['message'].indexOf('+')) {
-            $_GET['message'] = $_GET['message'].replace(/\+/g, ' ');
-        }
-        document.getElementById("myABC").style.display = "block";
-        document.getElementById("createCard").style.display = "none";
+    $_GET['message'] = decodeURI($_GET['message']);
+    if ($_GET['message'].indexOf('+')) {
+        $_GET['message'] = $_GET['message'].replace(/\+/g, ' ');
+    }
+    document.getElementById("myABC").style.display = "block";
+    document.getElementById("createCard").style.display = "none";
 
-        if ($_GET['message'].indexOf('%40') > -1) {
-            console.log('at found');
-            $_GET['message'] = $_GET['message'].replace(/%40/g, 'Ф');
-        }
+    if ($_GET['message'].indexOf('%40') > -1) {
+        console.log('at found');
+        $_GET['message'] = $_GET['message'].replace(/%40/g, 'Ф');
     }
 }
 
@@ -684,17 +747,27 @@ function hideH1() {
     $("#createCard").hide()
 }
 
+//GET-variables
 if (typeof $_GET['bgr'] !== 'undefined') {
     $(function () {
         if (bgPic[$_GET['bgr']]) {
             console.log('bgr', bgPic[$_GET['bgr']]);
-            $("#myABC").css({"background-size": "80%", "background-image": "url(" + bgPic[$_GET['bgr']] + ")"});
-        } else {
-            console.log('bgr not found');
-        }
-        if (bgPic2[$_GET['bgr']]) {
-            console.log('bgr', bgPic2[$_GET['bgr']]);
-            $("#myABC").css({"background-size": "80%", "background-image": "url(" + bgPic2[$_GET['bgr']] + ")"});
+            var bgrPic;
+
+            if ($_GET['bgrArrNum'] == 0) {
+                bgrPic = bgPic[$_GET['bgr']]
+                console.log("bgrArrNum 0", bgPic[$_GET['bgr']])
+            }
+            if ($_GET['bgrArrNum'] == 2) {
+                bgrPic = bgPic2[$_GET['bgr']]
+            }
+
+            $("#myABC").css({"background-size": "100%", "background-image": "url(" + bgrPic + ")"});
+            /*
+                        if ($_GET['bgrArrNum'] == 3) {
+                            $("#myABC").css({"background-size": "80%", "background-image": "url(" + bgPic3[$_GET['bgr']] + ")"});
+                        }*/
+
         } else {
             console.log('bgr not found');
         }
@@ -706,13 +779,16 @@ if (typeof $_GET['bgr'] !== 'undefined') {
                 console.log('letterBG not checked');
             }
         }
+        if (typeof $_GET['filter'] !== 'undefined') {
+            if ($_GET['filter'] && $_GET['txtBgr']) {
+                window.applyFilter($_GET['filter'], 'myABC');
+            }
+        }
         if (typeof $_GET['stripe'] !== 'undefined') {
             if ($_GET['stripe'] && $_GET['txtBgr']) {
                 $("#myABC .line").css({"background-image": "url(" + bgrArr[$_GET['txtBgr']] + ")"});
+                $("#myABC .line").css({"background-color": "rgba(255,255,255,0)"});
             }
-        }
-        if (typeof $_GET['filter'] !== 'undefined') {
-            window.applyFilter($_GET['filter'], 'myABC');
         }
     });
 }
@@ -720,10 +796,14 @@ if (typeof $_GET['bgr'] !== 'undefined') {
 if (typeof $_GET['message'] !== 'undefined') {
     showABC();
     hideH1();
+    if ($_GET['comment']) {
+        //$_GET['comment'] = $_GET['comment'].replace();
+        $("#commentMessage").text($_GET['comment'].replace(/\+/g, ' ').replace(/%2C/g, ','));
+    }
     if ($_GET['message'].indexOf('%0D%0A') > -1) {
         $_GET['message'] = $_GET['message'].replace(/%0D%0A/g, '&nbsp; &nbsp; &nbsp;');
     }
-    /* if ($_GET['message'].indexOf('heartsymbol') > -1 || $_GET['message'].indexOf('smilesymbol') > -1) {
+    /** if ($_GET['message'].indexOf('heartsymbol') > -1 || $_GET['message'].indexOf('smilesymbol') > -1) {
 
          var symbolArr = $_GET['message'].split('symbol');
          symbolArr.pop();
@@ -735,8 +815,7 @@ if (typeof $_GET['message'] !== 'undefined') {
          })
          $_GET['message'] = $_GET['message'].replace(/heartsymbol/g, '');
          $_GET['message'] = $_GET['message'].replace(/smilesymbol/g, '');
-     }*/
-    // $_GET['message'] = $_GET['message'].replace(/symbol/g, '');
+     }**/
     writePhrase($_GET['message'], 'myABC', $_GET['sizeLetter']);
     var i;
     if ($_GET['toRightVar']) {
@@ -761,6 +840,7 @@ if (typeof $_GET['message'] !== 'undefined') {
     hideABC();
 }
 
+//style for letters
 function style(v) {
     var str = '';
     v.forEach(element => {
@@ -773,6 +853,7 @@ function style(v) {
     return str;
 }
 
+//arrays for backgronds and letters
 var fractalBlueArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/blue1.jpg',
     'https://sofia-shchur.github.io/pictures/filters/fractals/blue2.jpg',
     'https://sofia-shchur.github.io/pictures/filters/fractals/blue3.jpg',
@@ -872,23 +953,32 @@ var bgPic = ['http://sofia-shchur.github.io/pictures/backgrounds/cosmo.jpg',
     'http://sofia-shchur.github.io/pictures/backgrounds/waterBG.jpg',
     'http://sofia-shchur.github.io/pictures/backgrounds/woods.jpg',
     'http://sofia-shchur.github.io/pictures/backgrounds/snow.jpg',
+    'http://sofia-shchur.github.io/pictures/backgrounds/branch_ny.jpg',
+    'http://sofia-shchur.github.io/pictures/backgrounds/desert.jpg',
+    'http://sofia-shchur.github.io/pictures/backgrounds/leafsBG2.jpg',
 
 ];
 
 var bgPic2 = ['http://sofia-shchur.github.io/pictures/backgrounds/heart_small.png',
     'http://sofia-shchur.github.io/pictures/backgrounds/flowers_pink.jpg',
     'http://sofia-shchur.github.io/pictures/backgrounds/strawberry.jpg',
+    'http://sofia-shchur.github.io/pictures/backgrounds/fall.jpg',
+    'http://sofia-shchur.github.io/pictures/backgrounds/leafsBG.jpg',
 ];
 
-var bgrArr = [ 'http://sofia-shchur.github.io/pictures/texture/flower.png',
+var bgrArr = ['http://sofia-shchur.github.io/pictures/texture/flower.png',
     'http://sofia-shchur.github.io/pictures/texture/fish.png',
     'http://sofia-shchur.github.io/pictures/texture/leaf.png',
     'http://sofia-shchur.github.io/pictures/texture/star.png',
     'http://sofia-shchur.github.io/pictures/texture/snowflake.gif',
+    'http://sofia-shchur.github.io/pictures/texture/cat.png',
+    'http://sofia-shchur.github.io/pictures/texture/ship.png',
+    'http://sofia-shchur.github.io/pictures/texture/camel.png',
+    'http://sofia-shchur.github.io/pictures/texture/new_year_ball.png',
     'http://sofia-shchur.github.io/pictures/texture/heart_mini.jpg',
     'http://sofia-shchur.github.io/pictures/texture/butterfly.jpg',
     'http://sofia-shchur.github.io/pictures/texture/water.jpg',
-    'http://sofia-shchur.github.io/pictures/texture/kitten.jpg',
+
 ];
 
 function messageEmptyCheck() {
@@ -906,30 +996,39 @@ function messageEmptyCheck() {
 
 var array3 = bgPic.concat(bgrArr);
 
+//validation for the submit button
 function validateMessage(formElement) {
     if ($('#message').val()) {
-        $("#sendCardForm").submit();
+        var resultPrompt = prompt("Do you want to add comment?");
+        if (resultPrompt.length < 1000) {
+            $("#comment").val(resultPrompt);
+            $("#sendCardForm").submit();
+        } else {
+            alert("Your comment is very long, maximum - 1000 chars");
+            return false;
+        }
     } else {
         alert("Write Your Postcard Message!");
         return false;
     }
 }
 
-function changeBgr(src, bgrId) {
+//change background div-AB
+function changeBgr(src, bgrId, arrNum) {
     $("#ab").css({"background-size": "100%", "background-image": "url(" + src + ")"});
     var num = bgrId.replace("bgr_", "");
     $('#bgr').val(num);
+    if (arrNum) {
+        $('#bgrArrNum').val(arrNum);
+    }
 }
 
-//<i id="colorText"> Color: </i> <input type="color" name="color" id="color" value="#757575"/>
-
-
+//filter zebra
 function mixLetterZebraFilter(curDiv) {
     let c = 0
     let idDiv;
     mixPicturesFractalsFilter(curDiv);
     $("#" + curDiv + " .letterDiv").each((index, val) => {
-
         var checkSpace = c % 4;
         if (!checkSpace) {
             idDiv = $(val).attr('id');
@@ -944,7 +1043,11 @@ function mixLetterZebraFilter(curDiv) {
     console.log("Im Zebra(")
 }
 
+//filter mix backgrounds of letters
 function mixBgFilter(curDiv) {
+    // $("#" + curDiv + " .line").each((index, val) => {
+
+    //})
     let c = 0;
     $("#" + curDiv + " .letterDiv").each((index, val) => {
         $(val).css({"background-image": "url(" + array3[c] + ")"});
@@ -952,9 +1055,33 @@ function mixBgFilter(curDiv) {
     })
 }
 
+//filter white fractals in desert
+function mixBgFilterWithDesert(curDiv) {
+    let c = 0;
+    // letters loop
+    $("#" + curDiv + " .line").each((index, val) => {
+        if (c > fractalWhiteArr.length - 1) {
+            c = 0;
+        }
+        $(val).css({"background-image": "url(" + fractalWhiteArr[c] + ")"});
+        console.log(c, fractalWhiteArr[c]);
+        c++;
+    })
+
+    // bgr loop
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        if ($(val).children().hasClass("line")) {
+            $(val).css({"background-image": "url(" + bgPic[6] + ")"});
+        } else {
+            $(val).css({"background-image": "url(" + bgPic[7] + ")"});
+        }
+    })
+}
+
+//filter zebra inside zebra
 function zebraInsideZebraFilter(curDiv) {
     var picFirst = array3[0];
-    var picSecond = array3[1];
+    var picSecond = bgPic2[0];
     var curTop = 0;
     var c = 0;
     var position = 0;
@@ -968,30 +1095,19 @@ function zebraInsideZebraFilter(curDiv) {
             c = 1;
         }
         curTop = position.top;
-        $(val).css({"background-image": "url(" + picFirst + ")"});
+        $(val).css({"background-image": "url(" + picSecond + ")"});
         if (c % 2) {
-            $(val).css({"background-image": "url(" + picSecond + ")"});
-            //$(val).hide("explode", {pieces: 9}, 1000);
+            $(val).css({"background-image": "url(" + picFirst + ")"});
         }
     })
 }
 
-/*class Book {
-    constructor(title, pages, price) {
-        this.title = title;
-        this.pages = pages;
-        this.price = price;
-    }
-
-}*/
-
+//filter mix pictures from letters-bg array
 function mixPicturesVersion1Filter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     console.log("first filter");
     var c = 0;
+
     $("#" + curDiv + " .line").each((index, val) => {
         if (c > bgrArr.length - 1) {
             c = 0;
@@ -1001,20 +1117,26 @@ function mixPicturesVersion1Filter(curDiv) {
     })
 }
 
+var bgrAll = bgPic.concat(bgPic2);
+
+//filter mix pictures from backgrounds array
 function mixPicturesVersion2Filter(curDiv) {
     console.log($("#" + curDiv + " .line"));
     var c = 0;
+
     $("#" + curDiv + " .line").each((index, val) => {
-        if (c > bgPic.length - 1) {
+        if (c > bgrAll.length - 1) {
             c = 0;
         }
-        $(val).css({"background-image": "url(" + bgPic[c] + ")"});
+        $(val).css({"background-image": "url(" + bgrAll[c] + ")"});
         c++;
     })
 }
 
+//filter mix pictures from letters-bg and backgrounds array
 function mixPicturesVersion3Filter(curDiv) {
     var c = 0;
+
     $("#" + curDiv + " .line").each((index, val) => {
         if (c > array3.length - 1) {
             c = 0;
@@ -1032,11 +1154,9 @@ function mixPicturesVersion3Filter(curDiv) {
 }
 
 function mixPicturesFractalsFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
+
     $("#" + curDiv + " .line").each((index, val) => {
         if (c > fractalWhiteArr.length - 1) {
             c = 0;
@@ -1047,12 +1167,11 @@ function mixPicturesFractalsFilter(curDiv) {
 
 }
 
+//filter fractals
 function fractalBlueArrayFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
+
     $("#" + curDiv + " .line").each((index, val) => {
         if (c > fractalBlueArr.length - 1) {
             c = 0;
@@ -1063,11 +1182,9 @@ function fractalBlueArrayFilter(curDiv) {
 }
 
 function fractalRedArrayFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
+
     $("#" + curDiv + " .line").each((index, val) => {
         if (c > fractalRedArr.length - 1) {
             c = 0;
@@ -1078,11 +1195,9 @@ function fractalRedArrayFilter(curDiv) {
 }
 
 function fractalBlackArrayFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
+
     $("#" + curDiv + " .line").each((index, val) => {
         if (c > fractalBlackArr.length - 1) {
             c = 0;
@@ -1093,11 +1208,9 @@ function fractalBlackArrayFilter(curDiv) {
 }
 
 function fractalWhiteArrayFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
+
     $("#" + curDiv + " .line").each((index, val) => {
         if (c > fractalWhiteArr.length - 1) {
             c = 0;
@@ -1108,10 +1221,7 @@ function fractalWhiteArrayFilter(curDiv) {
 }
 
 function fractalYellowArrayFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
     $("#" + curDiv + " .line").each((index, val) => {
         if (c > fractalYellowArr.length - 1) {
@@ -1123,12 +1233,10 @@ function fractalYellowArrayFilter(curDiv) {
 }
 
 function fractalGreenArrayFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
     $("#" + curDiv + " .line").each((index, val) => {
+
         if (c > fractalGreenArr.length - 1) {
             c = 0;
         }
@@ -1137,13 +1245,12 @@ function fractalGreenArrayFilter(curDiv) {
     })
 }
 
+//filter snowflakes
 function snowflakesArrayFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
     $("#" + curDiv + " .line").each((index, val) => {
+
         if (c > snowflakesArr.length - 1) {
             c = 0;
         }
@@ -1152,13 +1259,12 @@ function snowflakesArrayFilter(curDiv) {
     })
 }
 
+//filter woods
 function blueWoodArrayFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
     $("#" + curDiv + " .line").each((index, val) => {
+
         if (c > blueWoodArr.length - 1) {
             c = 0;
         }
@@ -1168,12 +1274,10 @@ function blueWoodArrayFilter(curDiv) {
 }
 
 function pinkWoodArrayFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
     $("#" + curDiv + " .line").each((index, val) => {
+
         if (c > pinkWoodArr.length - 1) {
             c = 0;
         }
@@ -1183,12 +1287,10 @@ function pinkWoodArrayFilter(curDiv) {
 }
 
 function greenWoodArrayFilter(curDiv) {
-    //remove bgr
-    $("#" + curDiv + " .letterDiv").each((index, val) => {
-        $(val).css({"background-image": ""});
-    })
+
     var c = 0;
     $("#" + curDiv + " .line").each((index, val) => {
+
         if (c > greenWoodArr.length - 1) {
             c = 0;
         }
@@ -1197,6 +1299,7 @@ function greenWoodArrayFilter(curDiv) {
     })
 }
 
+//filter 2 fractals
 function fractalBlackRedArrayFilter(curDiv) {
     var picFirst = fractalWhiteArr[1];
     var picSecond = fractalBlackArr[0];
@@ -1205,6 +1308,7 @@ function fractalBlackRedArrayFilter(curDiv) {
     var position = 0;
     mixLetterZebraFilter(curDiv);
     $("#" + curDiv + " .zebra").each((index, val) => {
+
         position = $(val).position();
         if (position.top > curTop) {
             c++;
@@ -1220,10 +1324,69 @@ function fractalBlackRedArrayFilter(curDiv) {
     })
 }
 
+//filter rotate
+function rotateFilter(curDiv) {
+    var picFirst = array3[0];
+    var picSecond = bgPic2[0];
+    var curTop = 0;
+    var curLeft = 0;
+    var c = 0;
+    var position = 0;
+    var newLine = false;
+    mixLetterZebraFilter(curDiv);
+    $("#" + curDiv + " .zebra").each((index, val) => {
+        position = $(val).position();
+        // need check when we create new line
+        if (position.top > curTop) {
+            var e = document.getElementById("sizeLetter");
+            var lineWidth = e.options[e.selectedIndex].text;
+            if (position.top - curTop != lineWidth / 1) {
+                console.log("!!!! found new line !!!!!!!")
+                console.log(position.top - curTop, lineWidth / 1)
+                newLine = true;
+            }
+            c++;
+        }
+        if (position.top < curTop) {
+            c = 1;
+        }
+        if (newLine) {
+            c = 1;
+        }
+        curTop = position.top;
+        curLeft = position.left;
+
+        $(val).css({"background-image": "url(" + picFirst + ")"});
+        if (c % 2) {
+            $(val).css({"background-image": "url(" + picSecond + ")"});
+        } else {
+            //$(val).css({"border-radius": "25px"});
+            $(val).addClass("rotateFilter");
+        }
+        newLine = false;
+    })
+}
+
+function rotateFilter2(curDiv) {
+    $("#" + curDiv + " .line").addClass("rotateFilter");
+}
+
+//shadow in letters preview on hover
+function mouseOverEffect(bgrLetterId) {
+    console.log(bgrLetterId);
+    $("#" + bgrLetterId).addClass("previewLetterShadow");
+}
+
+function mouseOutEffect(bgrLetterId) {
+    console.log(bgrLetterId);
+    $("#" + bgrLetterId).removeClass("previewLetterShadow");
+}
+
+//change background of letters
 function changeLettersBgr(srcBg, bgrLetterId) {
     if (document.getElementById('stripe').checked) {
         $("#ab .line").css({"background-image": "url(" + srcBg + ")"});
-        $("#ab .line").css({"background-color": "rgba(156, 22, 181, 0)"});
+        $("#ab .line").css({"background-color": "rgba(255,255,255,0)"});
     }
     console.log(bgrLetterId);
     var num = bgrLetterId.replace("img_", "");
@@ -1232,12 +1395,18 @@ function changeLettersBgr(srcBg, bgrLetterId) {
     $("#img_" + num).addClass("checkedImage");
 }
 
+//remove background in div-AB
 function removeBg() {
     $("#ab").css({"background-image": "url('')"});
 }
 
+//choose filter
 window.applyFilter = function (optionValue, curDiv) {
     // ---- apply filter function
+    $("#" + curDiv + " .line").removeClass("rotateFilter");
+    $("#" + curDiv + " .letterDiv").each((index, val) => {
+        $(val).css({"background-image": ""});
+    })
     if (optionValue == 0) {
         mixPicturesVersion1Filter(curDiv);
     } else if (optionValue == 1) {
@@ -1272,9 +1441,16 @@ window.applyFilter = function (optionValue, curDiv) {
         pinkWoodArrayFilter(curDiv);
     } else if (optionValue == 16) {
         greenWoodArrayFilter(curDiv);
+    } else if (optionValue == 17) {
+        mixBgFilterWithDesert(curDiv);
+    } else if (optionValue == 18) {
+        rotateFilter(curDiv);
+    } else if (optionValue == 19) {
+        rotateFilter2(curDiv);
     }
 }
 
+//GET-variable for translate
 $(function () {
     if (typeof $_GET['lang'] !== 'undefined') {
         console.log("lang found doc ready");
@@ -1283,15 +1459,15 @@ $(function () {
             translateFn(1);
         }
     }
-
+//preview pictures for backgrounds
     for (let i in bgPic) {
-        $("#previewBgr").append("<img onclick='changeBgr(this.src, this.id);' id='bgr_" + i + "' style='height: 64px; width: 64px; cursor: pointer' src='" + bgPic[i] + "'/>")
+        $("#previewBgr").append("<img onclick='changeBgr(this.src, this.id, 0);' id='bgr_" + i + "' style='height: 64px; width: 64px; cursor: pointer; border-radius: 7px; margin: 1px;' src='" + bgPic[i] + "'/>")
     }
     for (let i in bgPic2) {
-        $("#previewBgr2").append("<img onclick='changeBgr(this.src, this.id);' id='bgr_" + i + "' style='height: 64px; width: 64px; cursor: pointer' src='" + bgPic2[i] + "'/>")
+        $("#previewBgr2").append("<img onclick='changeBgr(this.src, this.id, 2);' id='bgr_" + i + "' style='height: 64px; width: 64px; cursor: pointer; border-radius: 7px; margin: 1px;' src='" + bgPic2[i] + "'/>")
     }
     for (let j in bgrArr) {
-        $("#previewLetterBgr").append("<img onclick='changeLettersBgr(this.src, this.id);' id='img_" + j + "' style='height: 64px; width: 64px; cursor: pointer' src='" + bgrArr[j] + "'/>")
+        $("#previewLetterBgr").append("<img onmouseout='mouseOutEffect(this.id);' onmouseover='mouseOverEffect(this.id);' onclick='changeLettersBgr(this.src, this.id);' id='img_" + j + "' class='previewLetter' src='" + bgrArr[j] + "'/>")
     }
     $("#img_0").addClass("checkedImage");
 
@@ -1305,11 +1481,13 @@ $(function () {
     });
 })
 
+//function for the button to show more backgrounds
 const showMoreBg = () => {
     $("#showMore").addClass('hide');
     $("#previewBgr2").removeClass('hide');
 }
 
+//translator
 var lang = 0; // 0 - eng, 1 - ru
 var translate = [];
 translate['hello'] = [['hello'], ['привет']];
