@@ -1,14 +1,34 @@
-//  new template https://startbootstrap.com/previews/business-casual
+//  new template https://startbootstrap.com/previews/business-casual $('#a' + randNum).css({top: level * 100})
 
 /****
  *
  * Greeting Card Service Page
  *
- *   1. Create new symbols.
- *   2. Create our gallery with premade postcards.
- *   3. Restore all bgr pictures
- *   4. Create arrows left, right, top, bottom
- *   5. Try to complete function toCenter
+ 1. Check todos list
+ 2. Create Gallery !
+ 3. Check other React Ninja Lessons.
+ 4. Check video - addEventListener +
+ *
+ *
+ const express = require('express')
+ const app = express()
+ const port = 3000
+
+ app.get('/login', (req, res) => {
+  res.send('login page!')
+})
+
+ app.get('/signup', (req, res) => {
+  res.send('Registration!')
+})
+
+ app.get('/', (req, res) => {
+  res.send('Main page - create card!')
+})
+
+ app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
  *
  */
 
