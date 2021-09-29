@@ -165,7 +165,7 @@ a {
 }
 
 a:hover {
-    color: #117964;
+    color: rgba(108, 84, 37, 0.87);
     text-decoration: underline;
 }
 
@@ -1035,7 +1035,7 @@ pre code {
     .offset-sm-11 {
         margin-left: 91.6666666667%;
     }
-}
+
 
 /*@media (min-width: 768px) {*/
     .col-md {
@@ -1247,7 +1247,7 @@ pre code {
     .offset-md-11 {
         margin-left: 91.6666666667%;
     }
-}
+
 
 @media (min-width: 992px) {
     .col-lg {
@@ -10745,7 +10745,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 @media (min-width: 992px) {
     .masthead {
-        padding-top: calc(6rem + 104px);
+        padding-top: calc(8rem + 110px);
         padding-bottom: 6rem;
     }
 
