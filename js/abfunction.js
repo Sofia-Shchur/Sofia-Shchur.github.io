@@ -98,6 +98,7 @@ function newSizeAb() {
 function clearAb() {
     $("#ab").html("");
     $("#message").val("");
+    document.getElementById("message").disabled = false;
 }
 
 //function for arrow "to left"
@@ -649,7 +650,7 @@ function writeLetter(arr, divId, lineWidth) {
     if (position.left < positionLeft && (window.backspaceActive == 0 && newSizeRun !== true)) {
         // alertPRO();
         // todo : decide situation with broken position when we use arrows for moving text
-        // todo : refactor - replace all decorative arrays (woods, fractals) in new file
+        // todo : refactor - replace all decorative arrays (woods, fractals) in new file +
     }
 
     positionLeft = position.left;
@@ -680,6 +681,7 @@ function alertPRO() {
     console.log("!!!! new line !!!!!");
 }
 
+//function to limit the number of lines
 function linesCount() {
     let rowCount = 0;
     let oldTop = 0;
@@ -706,12 +708,11 @@ function linesCount() {
             console.log(positionRow.top , oldTop);
         }
 
-        if (rowCount > 3) {
+        if (rowCount > 4) {
             rowCount = 0;
-            alert("rowCount > 3");
-            // todo: dont allow write more.
-
-            // alertPRO();
+            document.getElementById("message").disabled = true;
+            alert("You can't write too much text here.");
+            // todo: dont allow write more. +
         }
     })
 }
@@ -853,134 +854,6 @@ function style(v) {
     return str;
 }
 
-//arrays for backgronds and letters
-var fractalBlueArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/blue1.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/blue2.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/blue3.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/blue4.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/blue5.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/blue6.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/blue7.jpg',
-];
-
-// todo: create new Arrays (fractals, woods, stripes) sort by color
-// todo: create new Filters (or fix existing) using new Arrays (fractals, woods, stripes)
-
-var fractalRedArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/red1.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/red2.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/red3.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/red4.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/red5.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/red6.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/red7.jpg',
-];
-
-var fractalBlackArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/black1.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/black2.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/black3.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/black4.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/black5.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/black6.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/black7.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/black8.jpg',
-];
-
-var fractalWhiteArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/white1.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/white2.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/white3.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/white4.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/white5.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/white6.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/white7.jpg',
-];
-
-var fractalYellowArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/yellow1.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow2.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow3.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow4.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow5.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow6.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/yellow7.jpg',
-];
-
-var fractalGreenArr = ['https://sofia-shchur.github.io/pictures/filters/fractals/green1.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/green2.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/green3.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/green4.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/green5.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/green6.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/fractals/green7.jpg',
-];
-
-var snowflakesArr = ['https://sofia-shchur.github.io/pictures/filters/snowf1.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/snowf2.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/snowf3.jpeg',
-    'https://sofia-shchur.github.io/pictures/filters/snowf4.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/snowf5.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/snowf6.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/snowf7.jpg',
-];
-
-var blueWoodArr = ['https://sofia-shchur.github.io/pictures/filters/bluewood1.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/bluewood2.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/bluewood3.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/bluewood4.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/bluewood5.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/bluewood6.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/bluewood7.jpg',
-];
-
-var pinkWoodArr = ['https://sofia-shchur.github.io/pictures/filters/pinkwood1.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/pinkwood2.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/pinkwood3.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/pinkwood4.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/pinkwood5.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/pinkwood6.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/pinkwood7.jpg',
-];
-
-var greenWoodArr = ['https://sofia-shchur.github.io/pictures/filters/greenwood1.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/greenwood2.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/greenwood3.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/greenwood4.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/greenwood5.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/greenwood6.jpg',
-    'https://sofia-shchur.github.io/pictures/filters/greenwood7.jpg',
-];
-
-var bgPic = ['http://sofia-shchur.github.io/pictures/backgrounds/cosmo.jpg',
-    'http://sofia-shchur.github.io/pictures/backgrounds/grass.jpg',
-    'http://sofia-shchur.github.io/pictures/backgrounds/waterBG.jpg',
-    'http://sofia-shchur.github.io/pictures/backgrounds/woods.jpg',
-    'http://sofia-shchur.github.io/pictures/backgrounds/snow.jpg',
-    'http://sofia-shchur.github.io/pictures/backgrounds/branch_ny.jpg',
-    'http://sofia-shchur.github.io/pictures/backgrounds/desert.jpg',
-    'http://sofia-shchur.github.io/pictures/backgrounds/leafsBG2.jpg',
-
-];
-
-var bgPic2 = ['http://sofia-shchur.github.io/pictures/backgrounds/heart_small.png',
-    'http://sofia-shchur.github.io/pictures/backgrounds/flowers_pink.jpg',
-    'http://sofia-shchur.github.io/pictures/backgrounds/strawberry.jpg',
-    'http://sofia-shchur.github.io/pictures/backgrounds/fall.jpg',
-    'http://sofia-shchur.github.io/pictures/backgrounds/leafsBG.jpg',
-];
-
-var bgrArr = ['http://sofia-shchur.github.io/pictures/texture/flower.png',
-    'http://sofia-shchur.github.io/pictures/texture/fish.png',
-    'http://sofia-shchur.github.io/pictures/texture/leaf.png',
-    'http://sofia-shchur.github.io/pictures/texture/star.png',
-    'http://sofia-shchur.github.io/pictures/texture/snowflake.gif',
-    'http://sofia-shchur.github.io/pictures/texture/cat.png',
-    'http://sofia-shchur.github.io/pictures/texture/ship.png',
-    'http://sofia-shchur.github.io/pictures/texture/camel.png',
-    'http://sofia-shchur.github.io/pictures/texture/new_year_ball.png',
-    'http://sofia-shchur.github.io/pictures/texture/heart_mini.jpg',
-    'http://sofia-shchur.github.io/pictures/texture/butterfly.jpg',
-    'http://sofia-shchur.github.io/pictures/texture/water.jpg',
-
-];
-
 function messageEmptyCheck() {
     //return;
     //fix messageEmptyCheck() for all situations;
@@ -999,17 +872,20 @@ var array3 = bgPic.concat(bgrArr);
 //validation for the submit button
 function validateMessage(formElement) {
     if ($('#message').val()) {
-        var resultPrompt = prompt("Do you want to add comment?");
-        if (resultPrompt.length < 1000) {
-            $("#comment").val(resultPrompt);
-            $("#sendCardForm").submit();
-        } else {
-            alert("Your comment is very long, maximum - 1000 chars");
-            return false;
-        }
+        var resultPrompt = prompt("Do you want to add a comment under the postcard? If not, click \"Cancel\".");
+        $("#sendCardForm").submit();
     } else {
         alert("Write Your Postcard Message!");
         return false;
+    }
+    if (resultPrompt) {
+        if (resultPrompt.length < 1000) {
+        $("#comment").val(resultPrompt);
+        $("#sendCardForm").submit();
+    } else {
+        alert("Your comment is very long, maximum - 1000 chars.");
+        return false;
+        }
     }
 }
 
